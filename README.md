@@ -1,2 +1,2 @@
-# payfc
-Payment Fees Calculator
+# fauz.io
+Just a personal site
