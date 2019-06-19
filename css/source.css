@@ -1,0 +1,357 @@
+
+body {
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    background: rgb(249, 249, 249);
+    color: rgb(73, 80, 87);
+}
+a, p, div, b, span, td, h1, h2, h3, h4, h5, h6{
+    color: rgb(73, 80, 87);
+}
+.header {
+    padding: 40px 0 80px 0;
+    background: rgb(255, 255, 255);
+}
+
+.container {
+    max-width: 1040px;
+}
+
+.logo a {
+    height: 30px;
+    display: inline-block;
+}
+
+.logo img {
+    max-height: 45px;
+    float: left;
+}
+
+.header-title h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: rgb(99, 122, 247);
+}
+
+.header-title h3 {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.my-input {
+    margin: 0;
+    padding: 30px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0px 20px rgb(99, 122, 247, .2), 0 6px 6px rgba(0, 0, 0, .05);
+}
+
+.my-input h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.my-input p {
+    margin-bottom: 20px;
+}
+
+.my-input form {
+    display: inline-block;
+    width: 100%;
+}
+
+.my-input form>div {
+    display: inline-block;
+    float: left;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.my-input form>div:last-child {
+    margin: 0;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    line-height: 34px;
+    float: left;
+    width: 50%;
+    margin: 0;
+}
+
+input {
+    margin: 0;
+    max-width: 50% !important;
+    float: right;
+}
+
+.content {
+    padding: 60px 0;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.my-results {
+    padding: 30px;
+    margin: 0;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, .05), 0 6px 6px rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+.title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-results {
+    width: 100%;
+    display: block;
+}
+
+.payment-item {
+    width: 100%;
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: left;
+    position: relative;
+    margin: 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.payment-item img,
+.payment-item h3 {
+    max-width: 30%;
+    display: block;
+    float: left;
+    font-size: 20px;
+    margin: 0;
+}
+
+.payment-item>div {
+    display: block;
+    width: 70%;
+    float: right;
+}
+
+.open-link {
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+
+.open-link img {
+    max-height: 30px;
+    padding-right: 10px;
+}
+
+.gr-pro:before {
+    content: "PRO";
+    position: absolute;
+    top: 0;
+    right: 10px;
+    padding: 5px;
+    background: rgb(238, 238, 238);
+    line-height: 1;
+    border-radius: 5px;
+    max-height: 30px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {}
+
+.costme a {
+    display: inline-block;
+    padding: 10px 15px;
+    background: rgb(221, 221, 221);
+    margin-bottom: 15px;
+    border-radius: 50px;
+    font-size: 15px;
+    line-height: 1;
+    text-decoration: none !important;
+    color: rgb(51, 51, 51);
+    margin: 0 10px 10px 0;
+}
+
+.costme a:hover {
+    background: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+    transition: .5s;
+}
+
+#lets-comparing {
+    width: 100%;
+    box-shadow: 0 0px 20px rgb(99, 122, 247, .2), 0 6px 6px rgba(0, 0, 0, .05);
+    overflow-x: scroll;
+    overflow: auto;
+    display: block;
+}
+
+#lets-comparing thead th {
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#lets-comparing td:first-child,
+#lets-comparing th:first-child {
+    width: 28%;
+    padding: 15px 20px;
+}
+
+#lets-comparing td,
+#lets-comparing th {
+    text-align: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    width: 18%;
+}
+
+#lets-comparing tbody td:first-child {
+    text-align: left;
+    background: rgb(255, 255, 255);
+}
+
+.share {
+    padding: 8px 16px;
+    padding-left: 45px;
+    float: right;
+    color: rgb(255, 255, 255);
+    background: rgb(99, 122, 247);
+    line-height: 1;
+    margin: 7px 0;
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none !important;
+    position: relative;
+}
+
+.share img {
+    max-width: 20px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.share:hover {
+    background: rgb(49, 51, 77);
+    transition: .4s;
+    color: rgb(255, 255, 255);
+}
+
+.before-fees {
+    padding-left: 40px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.costme {
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 10px;
+}
+
+.costme h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.costme a {
+    display: inline-block;
+    padding: 8px 12px;
+    background: rgb(221, 221, 221);
+    border-radius: 50px;
+    font-size: 13px;
+    line-height: 1;
+    text-decoration: none !important;
+    color: rgb(99, 122, 247);
+    margin: 0 10px 10px 0;
+}
+
+.footer {
+    padding: 60px 0;
+    background: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.about {
+    width: 100%;
+    padding: 30px;
+    margin: 0;
+    box-shadow: 0 0px 20px rgb(99, 122, 247, .2), 0 6px 6px rgba(0, 0, 0, .05);
+}
+
+.me img {
+    max-width: 70px;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid rgb(99, 122, 247);
+}
+
+.social {
+    margin: 0;
+}
+
+.social a {
+    display: block;
+    padding: 6px;
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+    background: rgb(99, 122, 247);
+    margin-top: 10px;
+    line-height: 1;
+    border-radius: 50px;
+    text-decoration: none !important;
+}
+
+.desc {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.desc p:last-child {
+    margin-bottom: 0;
+}
+
+.thanks-to {
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.thanks-to a {
+    font-size: 12px;
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 4px;
+    background: rgb(221, 221, 221);
+    color: rgb(85, 85, 85);
+    border-radius: 50px;
+    line-height: 1;
+}
+
+.report {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 14px;
+}
+
+.report a {
+    color: rgb(99, 122, 247);
+}
