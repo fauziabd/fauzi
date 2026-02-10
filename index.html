@@ -2115,18 +2115,17 @@
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
     const status = document.getElementById('formStatus');
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const subject = document.getElementById('subject').value.trim();
-    const message = document.getElementById('message').value.trim();
+    const nameVal = document.getElementById('name').value.trim();
+    const emailVal = document.getElementById('email').value.trim();
+    const subjectVal = document.getElementById('subject').value.trim();
+    const messageVal = document.getElementById('message').value.trim();
 
-    // Hide previous status
-    status.style.display = 'none';
+    // Reset
     status.className = 'form-status';
+    status.innerHTML = '';
 
-    if (!name || !email || !message) {
-      status.className = 'form-status error';
-      status.innerHTML = '⚠ Please fill in all required fields.';
+    if (!nameVal || !emailVal || !messageVal) {
+      showStatus('error', '⚠ Please fill in all required fields.');
       return;
     }
 
@@ -2137,38 +2136,44 @@
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message })
+        body: JSON.stringify({ name: nameVal, email: emailVal, subject: subjectVal, message: messageVal })
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (res.ok) {
-        status.className = 'form-status success';
-        status.innerHTML = '✓ Message sent! I\'ll get back to you soon.';
+        showStatus('success', '✓ Message sent! I\'ll get back to you soon.');
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('subject').value = '';
         document.getElementById('message').value = '';
-        // Auto-dismiss after 6 seconds
-        setTimeout(() => {
-          status.style.display = 'none';
-          status.className = 'form-status';
-        }, 6000);
       } else {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || 'Something went wrong');
+        showStatus('error', '✕ ' + (data.error || 'Something went wrong. Please try again.'));
       }
     } catch (err) {
-      status.className = 'form-status error';
-      status.innerHTML = '✕ ' + (err.message || 'Failed to send. Please try again.');
-      // Auto-dismiss after 6 seconds
-      setTimeout(() => {
-        status.style.display = 'none';
-        status.className = 'form-status';
-      }, 6000);
+      showStatus('error', '✕ Network error. Please check your connection and try again.');
     }
 
     btn.disabled = false;
     btn.textContent = 'Send message →';
   }
+
+  function showStatus(type, msg) {
+    const status = document.getElementById('formStatus');
+    status.innerHTML = msg;
+    status.className = 'form-status ' + type;
+    status.style.display = 'flex';
+    setTimeout(() => {
+      status.style.opacity = '0';
+      status.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => {
+        status.style.display = 'none';
+        status.style.opacity = '1';
+        status.className = 'form-status';
+      }, 400);
+    }, 6000);
+  }
+
   window.submitForm = submitForm;
 </script>
 
