@@ -1074,6 +1074,7 @@
     transition: all 0.3s ease;
     letter-spacing: 0.02em;
     align-self: center;
+    width: 100%;
   }
 
   .form-submit:hover {
@@ -1121,6 +1122,67 @@
   @keyframes toastIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  .char-count {
+    float: right;
+    font-weight: 400;
+    color: #555;
+    transition: color 0.3s;
+  }
+
+  .char-count.valid {
+    color: var(--accent);
+  }
+
+  .form-input.invalid,
+  .form-textarea.invalid {
+    border-color: #ff6b6b;
+  }
+
+  .form-input.valid,
+  .form-textarea.valid {
+    border-color: rgba(196, 247, 69, 0.3);
+  }
+
+  .form-success-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    animation: toastIn 0.5s ease;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: successPop 0.5s ease;
+  }
+
+  @keyframes successPop {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  .success-title {
+    font-family: var(--serif);
+    font-size: 24px;
+  }
+
+  .success-desc {
+    color: var(--text-muted);
+    font-size: 15px;
   }
 
   @media (max-width: 600px) {
@@ -2021,27 +2083,40 @@
     Let me build it for you. Whether it's a directory, landing page system, or a full content engine optimized for search and AI visibility — I'll take it from keyword research to live pages.
   </p>
 
-  <div class="contact-form" id="contactForm">
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label" for="name">Name</label>
-        <input type="text" id="name" class="form-input" placeholder="Your name" required>
+  <div id="formWrapper">
+    <div class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="name">Name *</label>
+          <input type="text" id="name" class="form-input" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email *</label>
+          <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+        </div>
+      </div>
+      <!-- Honeypot — hidden from humans -->
+      <div style="position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
       </div>
       <div class="form-group">
-        <label class="form-label" for="email">Email</label>
-        <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+        <label class="form-label" for="subject">Subject</label>
+        <input type="text" id="subject" class="form-input" placeholder="Programmatic SEO project">
       </div>
+      <div class="form-group">
+        <label class="form-label" for="message">Message * <span class="char-count" id="charCount">0 / 50 min</span></label>
+        <textarea id="message" class="form-textarea" placeholder="Tell me about your project — what niche, how many pages, what CMS..." required></textarea>
+      </div>
+      <button type="button" class="form-submit" id="submitBtn" onclick="submitForm()" disabled>Send message →</button>
+      <div class="form-status" id="formStatus"></div>
     </div>
-    <div class="form-group">
-      <label class="form-label" for="subject">Subject</label>
-      <input type="text" id="subject" class="form-input" placeholder="Programmatic SEO project">
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="message">Message</label>
-      <textarea id="message" class="form-textarea" placeholder="Tell me about your project — what niche, how many pages, what CMS..." required></textarea>
-    </div>
-    <button type="button" class="form-submit" id="submitBtn" onclick="submitForm()">Send message →</button>
-    <div class="form-status" id="formStatus"></div>
+  </div>
+  <div class="form-success-state" id="formSuccess" style="display: none;">
+    <div class="success-icon">✓</div>
+    <h3 class="success-title">Message sent!</h3>
+    <p class="success-desc">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+    <button class="btn-secondary" onclick="resetForm()" style="align-self: center;">Send another message</button>
   </div>
 </section>
 
@@ -2111,62 +2186,105 @@
   overlay.addEventListener('click', closeMenu);
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-  // Contact form
+  // ─── Form validation ───
+  const MIN_MSG_LENGTH = 50;
+  const formFields = {
+    name: document.getElementById('name'),
+    email: document.getElementById('email'),
+    message: document.getElementById('message'),
+  };
+  const submitBtn = document.getElementById('submitBtn');
+  const charCount = document.getElementById('charCount');
+  let formLoadTime = Date.now();
+
+  function isValidEmail(e) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  }
+
+  function validateForm() {
+    const n = formFields.name.value.trim().length >= 2;
+    const e = isValidEmail(formFields.email.value.trim());
+    const m = formFields.message.value.trim().length >= MIN_MSG_LENGTH;
+
+    formFields.name.className = 'form-input' + (formFields.name.value.trim() ? (n ? ' valid' : ' invalid') : '');
+    formFields.email.className = 'form-input' + (formFields.email.value.trim() ? (e ? ' valid' : ' invalid') : '');
+    formFields.message.className = 'form-textarea' + (formFields.message.value.trim() ? (m ? ' valid' : ' invalid') : '');
+
+    const len = formFields.message.value.trim().length;
+    charCount.textContent = len + ' / ' + MIN_MSG_LENGTH + ' min';
+    charCount.className = 'char-count' + (len >= MIN_MSG_LENGTH ? ' valid' : '');
+
+    submitBtn.disabled = !(n && e && m);
+  }
+
+  Object.values(formFields).forEach(function(f) {
+    f.addEventListener('input', validateForm);
+    f.addEventListener('blur', validateForm);
+  });
+
   async function submitForm() {
-    const btn = document.getElementById('submitBtn');
-    const status = document.getElementById('formStatus');
-    const nameVal = document.getElementById('name').value.trim();
-    const emailVal = document.getElementById('email').value.trim();
-    const subjectVal = document.getElementById('subject').value.trim();
-    const messageVal = document.getElementById('message').value.trim();
+    var btn = submitBtn;
+    var status = document.getElementById('formStatus');
+    var honeypot = document.getElementById('website');
 
-    // Reset
-    status.className = 'form-status';
-    status.innerHTML = '';
-
-    if (!nameVal || !emailVal || !messageVal) {
-      showStatus('error', '⚠ Please fill in all required fields.');
+    if (honeypot.value) {
+      showStatus('success', '✓ Message sent!');
       return;
     }
 
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: nameVal, email: emailVal, subject: subjectVal, message: messageVal })
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok) {
-        showStatus('success', '✓ Message sent! I\'ll get back to you soon.');
-        document.getElementById('name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('subject').value = '';
-        document.getElementById('message').value = '';
-      } else {
-        showStatus('error', '✕ ' + (data.error || 'Something went wrong. Please try again.'));
-      }
-    } catch (err) {
-      showStatus('error', '✕ Network error. Please check your connection and try again.');
+    if (Date.now() - formLoadTime < 3000) {
+      showStatus('error', '✕ Please take your time filling out the form.');
+      return;
     }
 
-    btn.disabled = false;
-    btn.textContent = 'Send message →';
+    var nameVal = formFields.name.value.trim();
+    var emailVal = formFields.email.value.trim();
+    var subjectVal = document.getElementById('subject').value.trim();
+    var messageVal = formFields.message.value.trim();
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.style.display = 'none';
+
+    try {
+      var res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameVal,
+          email: emailVal,
+          subject: subjectVal,
+          message: messageVal,
+          _t: Date.now() - formLoadTime
+        })
+      });
+
+      var data = await res.json().catch(function() { return {}; });
+
+      if (res.ok) {
+        document.getElementById('formWrapper').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'flex';
+      } else {
+        showStatus('error', '✕ ' + (data.error || 'Something went wrong. Please try again.'));
+        btn.disabled = false;
+        btn.textContent = 'Send message →';
+      }
+    } catch (err) {
+      showStatus('error', '✕ Network error. Please check your connection.');
+      btn.disabled = false;
+      btn.textContent = 'Send message →';
+    }
   }
 
   function showStatus(type, msg) {
-    const status = document.getElementById('formStatus');
+    var status = document.getElementById('formStatus');
     status.innerHTML = msg;
     status.className = 'form-status ' + type;
     status.style.display = 'flex';
-    setTimeout(() => {
+    setTimeout(function() {
       status.style.opacity = '0';
       status.style.transition = 'opacity 0.4s ease';
-      setTimeout(() => {
+      setTimeout(function() {
         status.style.display = 'none';
         status.style.opacity = '1';
         status.className = 'form-status';
@@ -2174,7 +2292,25 @@
     }, 6000);
   }
 
+  function resetForm() {
+    document.getElementById('formWrapper').style.display = 'block';
+    document.getElementById('formSuccess').style.display = 'none';
+    formFields.name.value = '';
+    formFields.email.value = '';
+    document.getElementById('subject').value = '';
+    formFields.message.value = '';
+    formFields.name.className = 'form-input';
+    formFields.email.className = 'form-input';
+    formFields.message.className = 'form-textarea';
+    charCount.textContent = '0 / ' + MIN_MSG_LENGTH + ' min';
+    charCount.className = 'char-count';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Send message →';
+    formLoadTime = Date.now();
+  }
+
   window.submitForm = submitForm;
+  window.resetForm = resetForm;
 </script>
 
 </body>
