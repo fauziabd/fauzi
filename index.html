@@ -4,9 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fauzi Abdillah — Programmatic SEO & AI-SEO (GEO) Specialist</title>
+<meta name="description" content="I build programmatic SEO and AI-SEO (GEO) systems that generate thousands of high-ranking pages from structured data, templates, and automation.">
+<meta name="author" content="Fauzi Abdillah">
+<meta property="og:title" content="Fauzi Abdillah — Programmatic SEO & GEO Specialist">
+<meta property="og:description" content="I build pages that build themselves. Programmatic SEO systems generating thousands of high-ranking pages from structured data and automation.">
+<meta property="og:image" content="https://fauzi.pages.dev/assets/fauziabdh.jpg">
+<meta property="og:url" content="https://fauzi.pages.dev">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fauziabdh">
+<meta name="twitter:title" content="Fauzi Abdillah — Programmatic SEO & GEO Specialist">
+<meta name="twitter:description" content="I build pages that build themselves. Programmatic SEO systems generating thousands of high-ranking pages.">
+<meta name="twitter:image" content="https://fauzi.pages.dev/assets/fauziabdh.jpg">
+<link rel="icon" type="image/jpeg" href="https://fauzi.pages.dev/assets/fauziabdh.jpg">
+<link rel="canonical" href="https://fauzi.pages.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/jpg" href="/assets/fauziabdh.jpg" />
 <style>
   :root {
     --bg: #0a0a0b;
@@ -98,14 +111,14 @@
     padding: 140px 40px 80px;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 56px;
+    gap: 64px;
   }
 
-  /* ─── Hero Top: Photo + Greeting ─── */
+  /* ─── Hero Top: Photo + Heading ─── */
   .hero-intro {
     display: flex;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
@@ -113,35 +126,38 @@
   .hero-photo-wrapper { flex-shrink: 0; }
 
   .hero-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 20px;
+    width: 160px;
+    height: 160px;
+    border-radius: 16px;
     object-fit: cover;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     transition: all 0.4s ease;
-    filter: grayscale(20%);
   }
 
   .hero-photo:hover {
     border-color: var(--accent);
     box-shadow: 0 0 40px var(--accent-glow);
-    filter: grayscale(0%);
-    transform: scale(1.03);
   }
 
-  .hero-greeting h1 {
+  .hero-heading {
     font-family: var(--serif);
-    font-size: clamp(32px, 4.5vw, 56px);
-    line-height: 1.15;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1.1;
     font-weight: 400;
   }
 
-  .hero-greeting h1 em {
+  .hero-heading em {
     font-style: italic;
     color: var(--accent);
   }
 
-  /* ─── Hero Middle: Subtitle + Desc ─── */
+  /* Align middle + bottom with text column (offset by photo + gap) */
+  .hero-details,
+  .hero-bottom {
+    margin-left: 200px; /* 160px photo + 40px gap */
+  }
+
+  /* ─── Hero Middle: Tag + Description ─── */
   .hero-details {
     max-width: 720px;
     opacity: 0;
@@ -154,10 +170,10 @@
     color: var(--accent);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .hero-tag::before {
@@ -168,7 +184,7 @@
   }
 
   .hero-desc {
-    font-size: 17px;
+    font-size: 16px;
     color: var(--text-muted);
     line-height: 1.75;
   }
@@ -184,7 +200,7 @@
 
   .hero-meta {
     display: flex;
-    gap: 40px;
+    gap: 48px;
     flex-wrap: wrap;
   }
 
@@ -218,14 +234,21 @@
     .hero-intro {
       flex-direction: column;
       align-items: flex-start;
-      gap: 28px;
+      gap: 24px;
     }
     .hero-photo {
       width: 120px;
       height: 120px;
-      border-radius: 16px;
+      border-radius: 12px;
     }
-    .hero { gap: 40px; padding: 120px 24px 60px; }
+    .hero-heading {
+      font-size: clamp(28px, 8vw, 40px);
+    }
+    .hero-details,
+    .hero-bottom {
+      margin-left: 0;
+    }
+    .hero { gap: 48px; padding: 120px 24px 60px; }
     .hero-meta { gap: 24px; }
     .hero-cta { flex-direction: column; }
     .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
@@ -363,6 +386,7 @@
     padding: 0 12px;
     gap: 6px;
     border-bottom: 1px solid var(--border);
+    position: relative;
   }
 
   .browser-dot {
@@ -377,12 +401,12 @@
   .browser-dot:nth-child(3) { background: #28c840; }
 
   .browser-url {
-    flex: 1;
-    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--mono);
     font-size: 10px;
     color: var(--text-muted);
-    margin-left: 20px;
   }
 
   .browser-body {
@@ -524,40 +548,238 @@
   }
 
   /* ─── Services / Tools section ─── */
+  /* ─── Tools section ─── */
   .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
   }
 
   .tool-card {
-    padding: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.3s;
+    padding: 36px 32px;
+    position: relative;
+    transition: all 0.3s ease;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
 
+  .tool-card:nth-child(3n) { border-right: none; }
+  .tool-card:nth-child(n+4) { border-bottom: none; }
+
   .tool-card:hover {
-    border-color: rgba(196,247,69,0.2);
     background: var(--surface-2);
   }
 
+  .tool-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 32px;
+    right: 32px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+    border-radius: 2px 2px 0 0;
+  }
+
+  .tool-card:hover::after {
+    height: 2px;
+  }
+
+  .tool-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
   .tool-icon {
-    font-size: 24px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .tool-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--border);
+    letter-spacing: 0.05em;
   }
 
   .tool-name {
+    font-family: var(--mono);
     font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 6px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
   }
 
   .tool-desc {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: 1.6;
+  }
+
+  .tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .tool-tag {
+    padding: 4px 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 900px) {
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .tool-card:nth-child(3n) { border-right: 1px solid var(--border); }
+    .tool-card:nth-child(2n) { border-right: none; }
+    .tool-card { border-bottom: 1px solid var(--border) !important; }
+    .tool-card:nth-last-child(-n+2) { border-bottom: none !important; }
+  }
+
+  @media (max-width: 560px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .tool-card { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+    .tool-card:last-child { border-bottom: none !important; }
+  }
+
+  /* ─── Testimonials Carousel ─── */
+  .testimonials-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials-track {
+    display: flex;
+    gap: 24px;
+    animation: slide 24s linear infinite;
+    width: max-content;
+  }
+
+  .testimonials-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .testimonial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    min-width: 420px;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(196, 247, 69, 0.3);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    color: #f5c518;
+    font-size: 14px;
+    margin-left: 22px;
+    margin-bottom: 12px;
+  }
+
+  .testimonial-quote {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .testimonial-client {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .testimonial-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .testimonial-role {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .testimonial-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .testimonial-project {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+
+  /* Fade edges */
+  .testimonials-wrapper::before,
+  .testimonials-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .testimonials-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+
+  .testimonials-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+  }
+
+  @media (max-width: 560px) {
+    .testimonial-card { min-width: 300px; max-width: 300px; padding: 28px; }
   }
 
   /* ─── Process section ─── */
@@ -617,15 +839,116 @@
   /* ─── Footer ─── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 40px;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 13px;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  footer a {
+  .footer-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .footer-name em {
     color: var(--accent);
+    font-style: italic;
+  }
+
+  .footer-tagline {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
     text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  .footer-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .footer-link svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .footer-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow); }
+    50% { opacity: 0.6; box-shadow: 0 0 8px 4px var(--accent-glow); }
+  }
+
+  @media (max-width: 700px) {
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-links { flex-wrap: wrap; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    footer { padding: 40px 24px; }
   }
 
   /* ─── Animations ─── */
@@ -770,17 +1093,15 @@
 
 <!-- Hero -->
 <section class="hero">
-  <!-- Top: Photo + Greeting -->
+  <!-- Top: Photo + Greeting side by side -->
   <div class="hero-intro">
     <div class="hero-photo-wrapper">
-      <img src="/assets/fauziabdh.jpg" alt="Fauzi Abdillah" class="hero-photo">
+      <img src="https://fauzi.pages.dev/assets/fauziabdh.jpg" alt="Fauzi Abdillah" class="hero-photo">
     </div>
-    <div class="hero-greeting">
-      <h1>Hi, I'm <em>Fauzi.</em><br>I build pages that build <em>themselves.</em></h1>
-    </div>
+    <h1 class="hero-heading">Hi, I'm Fauzi <em>Abdillah.</em><br>I build pages that build <em>themselves.</em></h1>
   </div>
 
-  <!-- Middle: Subtitle + Description -->
+  <!-- Middle: Tag + Description -->
   <div class="hero-details">
     <div class="hero-tag">Programmatic SEO & AI-SEO (GEO) Specialist</div>
     <p class="hero-desc">
@@ -1079,6 +1400,150 @@
   </div>
 </section>
 
+<!-- Testimonials -->
+<div class="divider"><hr></div>
+<section class="section" id="testimonials">
+  <div class="section-label">Client Reviews</div>
+  <h2 class="section-title">What clients say</h2>
+  <p class="section-desc">
+    Every project rated 5.0. Here's what my clients had to say.
+  </p>
+
+  <div class="testimonials-wrapper">
+    <div class="testimonials-track">
+      <!-- Original 4 -->
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi is a very impressive developer. He was able to help with a programmatic SEO project, from gathering and sorting the data to building out the site on WordPress and making it look and function great on the front end.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Jake C.</span>
+            <span class="testimonial-role">United States</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Full Stack Database Site</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi is one of the best freelancers I have ever worked with. He was extremely communicative and diligent. He completed my project exactly as I wanted and answered all of my questions. I would highly recommend him for his talent and skill set.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Sandeep</span>
+            <span class="testimonial-role">United States</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Programmatic SEO Build Out</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">It's easy to work with Fauzi. He's skillful, gives honest feedback and delivers stellar work.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Hogni</span>
+            <span class="testimonial-role">Denmark</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Localized Landing Pages</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi completed the job successfully as per requirement. Was really nice to work with him on this project. Hopefully, we will work together soon.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Paolo</span>
+            <span class="testimonial-role">Italia</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Clock Website — pSEO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicated for seamless loop -->
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi is a very impressive developer. He was able to help with a programmatic SEO project, from gathering and sorting the data to building out the site on WordPress and making it look and function great on the front end.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Jake C.</span>
+            <span class="testimonial-role">United States</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Full Stack Database Site</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi is one of the best freelancers I have ever worked with. He was extremely communicative and diligent. He completed my project exactly as I wanted and answered all of my questions. I would highly recommend him for his talent and skill set.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Sandeep</span>
+            <span class="testimonial-role">United States</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Programmatic SEO Build Out</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">It's easy to work with Fauzi. He's skillful, gives honest feedback and delivers stellar work.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Hogni</span>
+            <span class="testimonial-role">Denmark</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Localized Landing Pages</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+          <p class="testimonial-quote">Fauzi completed the job successfully as per requirement. Was really nice to work with him on this project. Hopefully, we will work together soon.</p>
+        </div>
+        <div class="testimonial-footer">
+          <div class="testimonial-client">
+            <span class="testimonial-name">Paolo</span>
+            <span class="testimonial-role">Italia</span>
+          </div>
+          <div class="testimonial-meta">
+            <span class="testimonial-project">Clock Website — pSEO</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Process -->
 <div class="divider"><hr></div>
 <section class="section" id="process">
@@ -1121,34 +1586,86 @@
   </p>
   <div class="tools-grid">
     <div class="tool-card reveal">
-      <div class="tool-icon">🗄️</div>
+      <div class="tool-top">
+        <span class="tool-icon">🗄️</span>
+        <span class="tool-number">01</span>
+      </div>
       <div class="tool-name">Database</div>
-      <div class="tool-desc">Google Sheets, Airtable, SQL/NoSQL</div>
+      <div class="tool-desc">Structured data pipelines for large-scale page generation.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Google Sheets</span>
+        <span class="tool-tag">Airtable</span>
+        <span class="tool-tag">SQL / NoSQL</span>
+      </div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-icon">🖥️</div>
+      <div class="tool-top">
+        <span class="tool-icon">🖥️</span>
+        <span class="tool-number">02</span>
+      </div>
       <div class="tool-name">CMS</div>
-      <div class="tool-desc">WordPress, Webflow, Framer, Shopify, Next.js</div>
+      <div class="tool-desc">Template-driven publishing across multiple platforms.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">WordPress</span>
+        <span class="tool-tag">Webflow</span>
+        <span class="tool-tag">Framer</span>
+        <span class="tool-tag">Shopify</span>
+        <span class="tool-tag">Next.js</span>
+      </div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-icon">⚡</div>
+      <div class="tool-top">
+        <span class="tool-icon">⚡</span>
+        <span class="tool-number">03</span>
+      </div>
       <div class="tool-name">Automation</div>
-      <div class="tool-desc">Python, Google Apps Script, Zapier, Make.com, n8n</div>
+      <div class="tool-desc">Workflow pipelines for scraping, transforming, and publishing.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Python</span>
+        <span class="tool-tag">Apps Script</span>
+        <span class="tool-tag">Make.com</span>
+        <span class="tool-tag">n8n</span>
+        <span class="tool-tag">Zapier</span>
+      </div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-icon">✍️</div>
+      <div class="tool-top">
+        <span class="tool-icon">✍️</span>
+        <span class="tool-number">04</span>
+      </div>
       <div class="tool-name">Content</div>
-      <div class="tool-desc">Custom templates, Anthropic's Claude, OpenAI's GPTs and more</div>
+      <div class="tool-desc">AI-assisted content generation at scale with quality control.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Anthropic's Claude</span>
+        <span class="tool-tag">OpenAI's GPTs</span>
+        <span class="tool-tag">Custom Templates</span>
+      </div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-icon">📊</div>
+      <div class="tool-top">
+        <span class="tool-icon">📊</span>
+        <span class="tool-number">05</span>
+      </div>
       <div class="tool-name">SEO</div>
-      <div class="tool-desc">Ahrefs, SEMrush, Google Search Console</div>
+      <div class="tool-desc">Keyword research, tracking, and performance analysis.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Ahrefs</span>
+        <span class="tool-tag">SEMrush</span>
+        <span class="tool-tag">Search Console</span>
+      </div>
     </div>
     <div class="tool-card reveal">
-      <div class="tool-icon">📦</div>
+      <div class="tool-top">
+        <span class="tool-icon">📦</span>
+        <span class="tool-number">06</span>
+      </div>
       <div class="tool-name">Data</div>
-      <div class="tool-desc">Web scraping, APIs, Google Business data</div>
+      <div class="tool-desc">Sourcing unique datasets that make each page genuinely valuable.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Web Scraping</span>
+        <span class="tool-tag">APIs</span>
+        <span class="tool-tag">Google Business</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1169,7 +1686,29 @@
 
 <!-- Footer -->
 <footer>
-  <p>© <span id="year"></span> Fauzi Abdillah · Programmatic SEO & GEO Specialist · <a href="https://www.linkedin.com/in/fauziabdh/" target="_blank">LinkedIn</a> · <a href="https://x.com/fauziabdh" target="_blank">X</a></p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-name">Fauzi <em>Abdillah.</em></div>
+      <div class="footer-tagline">Programmatic SEO & GEO Specialist</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/fauziabdh/" target="_blank" class="footer-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://x.com/fauziabdh" target="_blank" class="footer-link">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @fauziabdh
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© <span id="year"></span> Fauzi Abdillah · Built with obsession for scale.</div>
+    <div class="footer-status">
+      <span class="footer-status-dot"></span>
+      Available for projects
+    </div>
+  </div>
 </footer>
 
 <!-- Scroll reveal -->
