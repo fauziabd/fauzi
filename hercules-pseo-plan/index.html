@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hercules.app — 100-Day Programmatic SEO Campaign Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C14;
+    --bg2: #0D1520;
+    --bg3: #111927;
+    --accent: #F0C040;
+    --accent2: #E8855A;
+    --accent3: #5AB4E8;
+    --green: #4ADE80;
+    --text: #E8EDF5;
+    --muted: #6B7A96;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -200px; right: -300px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240,192,64,0.07) 0%, transparent 60%);
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240,192,64,0.08);
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .cover-badge span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .cover-badge::before { content: '●'; color: var(--green); font-size: 8px; }
+
+  h1.cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 86px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  h1.cover-title em { font-style: italic; color: var(--accent); }
+
+  .cover-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 780px;
+  }
+
+  .stat-box {
+    background: var(--bg2);
+    padding: 22px 16px;
+    text-align: center;
+    animation: fadeUp 0.6s ease both;
+  }
+  .stat-box:nth-child(1) { animation-delay: 0.1s; }
+  .stat-box:nth-child(2) { animation-delay: 0.2s; }
+  .stat-box:nth-child(3) { animation-delay: 0.3s; }
+  .stat-box:nth-child(4) { animation-delay: 0.4s; }
+  .stat-box:nth-child(5) { animation-delay: 0.5s; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border); opacity: 0; }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  h2.section-title em { font-style: italic; color: var(--accent); }
+
+  p.lead {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 660px;
+    line-height: 1.85;
+    margin-bottom: 36px;
+  }
+
+  /* ── USER JOURNEY FLOW ── */
+  .journey {
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .journey-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    position: relative;
+  }
+
+  .journey-steps::before {
+    content: '';
+    position: absolute;
+    top: 38px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3), var(--green));
+    z-index: 0;
+  }
+
+  .journey-step {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 14px 18px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .journey-step:hover { transform: translateY(-3px); border-color: rgba(240,192,64,0.25); }
+
+  .journey-step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .journey-step .step-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+  .journey-step .step-title {
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .journey-step .step-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+  .journey-step:nth-child(1) { border-top: 2px solid var(--accent); }
+  .journey-step:nth-child(2) { border-top: 2px solid #C8A030; }
+  .journey-step:nth-child(3) { border-top: 2px solid var(--accent2); }
+  .journey-step:nth-child(4) { border-top: 2px solid var(--accent3); }
+  .journey-step:nth-child(5) { border-top: 2px solid var(--green); }
+
+  .stripe-note {
+    margin-top: 20px;
+    background: rgba(90,180,232,0.06);
+    border: 1px solid rgba(90,180,232,0.15);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .stripe-note .note-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .stripe-note strong { color: var(--accent3); }
+
+  /* ── KEYWORDS ── */
+  .keywords-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .keyword-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .keyword-card:hover { transform: translateY(-3px); border-color: rgba(240,192,64,0.3); }
+  .keyword-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .keyword-card:nth-child(1)::before { background: var(--accent); }
+  .keyword-card:nth-child(2)::before { background: var(--accent); }
+  .keyword-card:nth-child(3)::before { background: var(--accent2); }
+  .keyword-card:nth-child(4)::before { background: var(--accent2); }
+  .keyword-card:nth-child(5)::before { background: var(--accent3); }
+
+  .kw-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+  .kw-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .kw-alt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--accent);
+    background: rgba(240,192,64,0.07);
+    border-radius: 3px;
+    padding: 2px 6px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .kw-desc { font-size: 11px; color: var(--muted); line-height: 1.65; }
+
+  .no-moat-note {
+    margin-top: 20px;
+    background: rgba(232,133,90,0.06);
+    border: 1px solid rgba(232,133,90,0.15);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .no-moat-note strong { color: var(--accent2); }
+
+  /* ── MATH ── */
+  .math-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 32px;
+  }
+
+  .math-header {
+    background: var(--bg3);
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .math-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .math-body { padding: 28px; }
+
+  .math-layers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .math-layer {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+  }
+
+  .math-layer .ml-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .math-layer:nth-child(1) .ml-num { color: var(--accent); }
+  .math-layer:nth-child(2) .ml-num { color: var(--accent2); }
+  .math-layer:nth-child(3) .ml-num { color: var(--accent3); }
+  .math-layer:nth-child(4) .ml-num { color: var(--green); }
+
+  .math-layer .ml-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .math-layer .ml-detail { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  .math-equation {
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .eq-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--bg3);
+    gap: 16px;
+  }
+
+  .eq-row .eq-label { flex: 1; }
+  .eq-row .eq-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    flex: 2;
+  }
+  .eq-row .eq-result {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 100px;
+    text-align: right;
+  }
+
+  .eq-row.total {
+    background: linear-gradient(135deg, rgba(240,192,64,0.1), rgba(240,192,64,0.03));
+    border: 1px solid rgba(240,192,64,0.2);
+  }
+  .eq-row.total .eq-label { color: var(--text); font-weight: 600; }
+  .eq-row.total .eq-result { color: var(--accent); font-size: 28px; }
+
+  /* ── INDUSTRIES ── */
+  .industries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .industry-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .industry-item:hover { border-color: rgba(240,192,64,0.3); background: var(--bg3); }
+  .industry-item .ico { font-size: 16px; flex-shrink: 0; }
+  .industry-item .name { color: var(--text); font-weight: 500; }
+  .industry-item .cat {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--accent3);
+    background: rgba(90,180,232,0.08);
+    border-radius: 3px;
+    padding: 2px 5px;
+    white-space: nowrap;
+  }
+
+  /* ── URL STRUCTURE ── */
+  .url-tree {
+    margin-top: 36px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .url-tree-header {
+    background: var(--bg3);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .url-level {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    border-bottom: 1px solid var(--border);
+    min-height: 72px;
+  }
+  .url-level:last-child { border-bottom: none; }
+
+  .url-depth {
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .url-depth .depth-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .url-level:nth-child(1) .depth-num { color: var(--accent); }
+  .url-level:nth-child(2) .depth-num { color: #D4960E; }
+  .url-level:nth-child(3) .depth-num { color: var(--accent2); }
+  .url-level:nth-child(4) .depth-num { color: var(--accent3); }
+  .url-level:nth-child(5) .depth-num { color: var(--green); }
+  .url-level:nth-child(6) .depth-num { color: #A78BFA; }
+
+  .url-depth .depth-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .url-content {
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .url-pattern {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .url-seg { color: var(--muted); }
+
+  .url-level:nth-child(1) .url-var { color: var(--accent); }
+  .url-level:nth-child(2) .url-var { color: #D4960E; }
+  .url-level:nth-child(3) .url-var { color: var(--accent2); }
+  .url-level:nth-child(4) .url-var { color: var(--accent3); }
+  .url-level:nth-child(5) .url-var { color: var(--green); }
+  .url-level:nth-child(6) .url-var { color: #A78BFA; }
+
+  .url-example {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.65;
+  }
+
+  .url-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--green);
+    background: rgba(74,222,128,0.07);
+    border: 1px solid rgba(74,222,128,0.12);
+    border-radius: 4px;
+    padding: 2px 8px;
+    display: inline-block;
+    margin-left: auto;
+    align-self: flex-start;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  .demo-note {
+    margin-top: 16px;
+    background: rgba(167,139,250,0.06);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .demo-note strong { color: #A78BFA; }
+
+  /* ── TIMELINE ── */
+  .timeline { margin-top: 40px; display: flex; flex-direction: column; gap: 4px; }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+  }
+
+  .phase-sidebar {
+    border: 1px solid var(--border);
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    padding: 24px 20px;
+  }
+  .phase:nth-child(1) .phase-sidebar { background: rgba(240,192,64,0.05); border-color: rgba(240,192,64,0.15); }
+  .phase:nth-child(2) .phase-sidebar { background: rgba(232,133,90,0.05); border-color: rgba(232,133,90,0.15); }
+  .phase:nth-child(3) .phase-sidebar { background: rgba(90,180,232,0.05); border-color: rgba(90,180,232,0.15); }
+
+  .phase-days {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .phase:nth-child(1) .phase-days { color: var(--accent); }
+  .phase:nth-child(2) .phase-days { color: var(--accent2); }
+  .phase:nth-child(3) .phase-days { color: var(--accent3); }
+
+  .phase-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .phase-body {
+    border: 1px solid var(--border);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+  }
+  .phase:nth-child(1) .phase-body { border-color: rgba(240,192,64,0.15); }
+  .phase:nth-child(2) .phase-body { border-color: rgba(232,133,90,0.15); }
+  .phase:nth-child(3) .phase-body { border-color: rgba(90,180,232,0.15); }
+
+  .phase-tasks {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .phase-tasks li {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .phase-tasks li::before {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    content: '→';
+  }
+  .phase:nth-child(1) .phase-tasks li::before { color: var(--accent); }
+  .phase:nth-child(2) .phase-tasks li::before { color: var(--accent2); }
+  .phase:nth-child(3) .phase-tasks li::before { color: var(--accent3); }
+
+  .phase-goal {
+    padding: 10px 16px;
+    border-radius: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .phase:nth-child(1) .phase-goal { background: rgba(240,192,64,0.07); color: var(--accent); }
+  .phase:nth-child(2) .phase-goal { background: rgba(232,133,90,0.07); color: var(--accent2); }
+  .phase:nth-child(3) .phase-goal { background: rgba(90,180,232,0.07); color: var(--accent3); }
+
+  /* ── COUNTRIES ── */
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .country-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .country-item:hover { border-color: rgba(240,192,64,0.3); color: var(--text); }
+  .country-item .flag { font-size: 20px; display: block; margin-bottom: 4px; }
+
+  .lang-note {
+    margin-top: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .lang-note h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .lang-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .lang-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .lang-tag.p1 { border-color: rgba(240,192,64,0.3); color: var(--accent); background: rgba(240,192,64,0.06); }
+  .lang-tag.p2 { border-color: rgba(90,180,232,0.2); color: var(--accent3); background: rgba(90,180,232,0.04); }
+
+  /* ── AEO ── */
+  .aeo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .aeo-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    transition: border-color 0.2s;
+  }
+  .aeo-card:hover { border-color: rgba(90,180,232,0.25); }
+
+  .aeo-engine {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .aeo-engine::before { content: '◉'; font-size: 8px; }
+  .aeo-card p { font-size: 13px; color: var(--muted); line-height: 1.75; }
+
+  /* ── PROJECTIONS ── */
+  .projection {
+    margin-top: 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .proj-header {
+    background: var(--bg3);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+    padding: 13px 24px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    gap: 12px;
+  }
+
+  .proj-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    gap: 12px;
+    transition: background 0.15s;
+    align-items: center;
+  }
+  .proj-row:last-child { border-bottom: none; }
+  .proj-row:hover { background: var(--bg3); }
+
+  .phase-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .proj-row .total {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    padding: 48px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    margin-top: 72px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.9;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cover { animation: fadeUp 0.7s ease forwards; }
+
+  strong { color: var(--text); font-weight: 600; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .green { color: var(--green); }
+  .muted { color: var(--muted); }
+
+  /* ── ORGANIC TRAFFIC PROJECTION ── */
+  .kw-sample { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-top: 32px; }
+  .kws-header { background: var(--bg3); padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .kws-title { font-size: 11px; letter-spacing: 0.08em; }
+  .kws-note { font-size: 10px; }
+  .kws-row { display: grid; grid-template-columns: 2.2fr 0.7fr 0.7fr 1.2fr 0.8fr; padding: 11px 20px; border-bottom: 1px solid var(--border); font-size: 12px; align-items: center; gap: 8px; transition: background 0.15s; }
+  .kws-row:last-child { border-bottom: none; }
+  .kws-row:hover { background: var(--bg3); }
+  .kws-head { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .kws-head:hover { background: var(--bg3); }
+  .kws-top { background: rgba(240,192,64,0.03); }
+  .kws-more { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-style: italic; background: var(--bg3); border-top: 1px solid var(--border); border-bottom: none; }
+  .pd-bar { display: inline-block; background: rgba(255,255,255,0.04); border-radius: 3px; height: 5px; width: 52px; overflow: hidden; vertical-align: middle; margin-right: 6px; }
+  .pd-bar div { height: 100%; background: var(--muted); border-radius: 3px; }
+  .pd-low div { background: var(--green); }
+  .pd-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); vertical-align: middle; }
+  .opp-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; display: inline-block; white-space: nowrap; }
+  .opp-high { background: rgba(74,222,128,0.1); color: var(--green); border: 1px solid rgba(74,222,128,0.2); }
+  .opp-med { background: rgba(240,192,64,0.08); color: var(--accent); border: 1px solid rgba(240,192,64,0.18); }
+  .opp-win { background: rgba(90,180,232,0.1); color: var(--accent3); border: 1px solid rgba(90,180,232,0.2); }
+
+  .insight-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  .insight-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .insight-card:hover { border-color: rgba(240,192,64,0.2); }
+  .insight-icon { font-size: 22px; margin-bottom: 10px; }
+  .insight-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; display: block; margin-bottom: 2px; line-height: 1; }
+  .insight-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .insight-body { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  .proj-model { margin-top: 28px; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .pm-header { background: var(--bg3); padding: 14px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .pm-title { font-size: 11px; letter-spacing: 0.08em; }
+  .pm-note-header { font-size: 10px; }
+  .pm-phases { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .pm-phase { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .pm-phase-final { background: rgba(74,222,128,0.04); border-color: rgba(74,222,128,0.15); }
+  .pm-phase-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .pm-calc-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .pm-input { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: center; min-width: 90px; }
+  .pm-input-num { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); display: block; line-height: 1; margin-bottom: 3px; }
+  .pm-input-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+  .pm-equals { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--muted); font-weight: 300; flex-shrink: 0; }
+  .pm-result { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 18px; text-align: center; }
+  .pm-result-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; display: block; line-height: 1; margin-bottom: 3px; }
+  .pm-result-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+  .pm-note-text { font-size: 12px; color: var(--muted); line-height: 1.6; font-style: italic; }
+
+  .traffic-footer { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .tf-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .tf-icon { font-size: 24px; flex-shrink: 0; }
+  .tf-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .tf-body { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  /* ── LANDING PAGE CONTENTS ── */
+  .lpc-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 40px;
+  }
+
+  .lpc-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .lpc-card:hover { border-color: rgba(240,192,64,0.2); }
+
+  .lpc-left {
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 6px;
+    border-right: 1px solid var(--border);
+  }
+
+  .l1 { background: rgba(240,192,64,0.05); }
+  .l2 { background: rgba(232,133,90,0.05); }
+  .l3 { background: rgba(90,180,232,0.05); }
+  .l4 { background: rgba(74,222,128,0.05); }
+  .l5 { background: rgba(167,139,250,0.05); }
+  .l6 { background: rgba(251,146,60,0.05); }
+
+  .lpc-depth {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .l1 .lpc-depth { color: var(--accent); }
+  .l2 .lpc-depth { color: var(--accent2); }
+  .l3 .lpc-depth { color: var(--accent3); }
+  .l4 .lpc-depth { color: var(--green); }
+  .l5 .lpc-depth { color: #A78BFA; }
+  .l6 .lpc-depth { color: #FB923C; }
+
+  .lpc-layer-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .lpc-url {
+    font-size: 9px;
+    color: var(--muted);
+    opacity: 0.55;
+    line-height: 1.7;
+    margin-top: 4px;
+    word-break: break-all;
+  }
+
+  .lpc-right {
+    background: var(--bg2);
+    padding: 22px 24px;
+  }
+
+  .lpc-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .lpc-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .lpc-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .lpc-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .lpc-block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .lpc-card:nth-child(1) .lpc-block-title { color: var(--accent); }
+  .lpc-card:nth-child(2) .lpc-block-title { color: var(--accent2); }
+  .lpc-card:nth-child(3) .lpc-block-title { color: var(--accent3); }
+  .lpc-card:nth-child(4) .lpc-block-title { color: var(--green); }
+  .lpc-card:nth-child(5) .lpc-block-title { color: #A78BFA; }
+  .lpc-card:nth-child(6) .lpc-block-title { color: #FB923C; }
+
+  .lpc-block-body {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── ABOUT ME ── */
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+    align-items: start;
+  }
+
+  .about-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .about-name em { font-style: italic; color: var(--accent); }
+
+  .about-title-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(240,192,64,0.07);
+    border: 1px solid rgba(240,192,64,0.15);
+    border-radius: 4px;
+    padding: 5px 12px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .about-location { font-size: 12px; margin-bottom: 20px; }
+
+  .about-bio {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 14px;
+    max-width: 580px;
+  }
+
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .about-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 14px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .about-link:hover { border-color: rgba(240,192,64,0.4); color: var(--accent); }
+
+  .about-reviews { display: flex; flex-direction: column; gap: 10px; }
+  .about-review-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+
+  .review-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+  }
+  .review-card:hover { border-color: rgba(240,192,64,0.2); }
+
+  .review-stars { color: var(--accent); font-size: 12px; margin-bottom: 8px; letter-spacing: 2px; }
+  .review-text { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; font-style: italic; }
+  .review-author { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text); }
+
+  /* PORTFOLIO */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .portfolio-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+  .portfolio-card:hover { transform: translateY(-3px); border-color: rgba(240,192,64,0.25); }
+
+  .port-hercules {
+    border-color: rgba(240,192,64,0.2);
+    background: rgba(240,192,64,0.04);
+  }
+  .port-hercules::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  .port-flag { font-size: 22px; margin-bottom: 10px; }
+  .port-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .port-type { font-size: 10px; letter-spacing: 0.08em; color: var(--accent3); margin-bottom: 10px; text-transform: uppercase; }
+  .port-desc { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .port-stats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .port-stat { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; }
+
+  /* DELIVER SECTION */
+  .deliver-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .deliver-heading em { font-style: italic; color: var(--accent); }
+
+  .deliver-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .deliver-card {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .deliver-card:hover { border-color: rgba(240,192,64,0.25); }
+
+  .deliver-card-final {
+    border-color: rgba(240,192,64,0.2);
+    background: rgba(240,192,64,0.03);
+  }
+
+  .deliver-num {
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--muted);
+    padding: 20px 0;
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+  .deliver-card:hover .deliver-num { color: var(--accent); }
+  .deliver-card-final .deliver-num { color: var(--accent); background: rgba(240,192,64,0.06); }
+
+  .deliver-content {
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .deliver-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+    min-width: 260px;
+    flex-shrink: 0;
+  }
+
+  .deliver-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+  }
+  .deliver-body em { color: var(--text); font-style: normal; font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .cover-stats { grid-template-columns: repeat(3, 1fr); }
+    .journey-steps { grid-template-columns: 1fr 1fr; }
+    .journey-steps::before { display: none; }
+    .keywords-grid { grid-template-columns: 1fr 1fr; }
+    .math-layers { grid-template-columns: 1fr 1fr; }
+    .industries { grid-template-columns: repeat(2, 1fr); }
+    .url-level { grid-template-columns: 1fr; }
+    .url-depth { border-right: none; border-bottom: 1px solid var(--border); }
+    .phase { grid-template-columns: 1fr; }
+    .phase-sidebar { border-radius: 12px 12px 0 0; border-right: 1px solid; border-bottom: none; }
+    .phase-body { border-radius: 0 0 12px 12px; }
+    .phase-tasks { grid-template-columns: 1fr; }
+    .aeo-grid { grid-template-columns: 1fr; }
+    .countries-grid { grid-template-columns: repeat(4, 1fr); }
+    .proj-header, .proj-row { grid-template-columns: 1fr 1fr 1fr; }
+    .proj-header span:nth-child(4), .proj-row span:nth-child(4),
+    .proj-header span:nth-child(5), .proj-row span:nth-child(5) { display: none; }
+    .about-hero { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .deliver-card { grid-template-columns: 44px 1fr; }
+    .deliver-content { flex-direction: column; gap: 8px; }
+    .deliver-title { min-width: unset; }
+    .deliver-body { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 10px; }
+    .insight-row { grid-template-columns: 1fr; }
+    .traffic-footer { grid-template-columns: 1fr; }
+    .kws-row { grid-template-columns: 1.5fr 0.6fr 0.6fr; }
+    .kws-row span:nth-child(4), .kws-row span:nth-child(5) { display: none; }
+    .lpc-card { grid-template-columns: 1fr; }
+    .lpc-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .lpc-blocks { grid-template-columns: 1fr; }
+    .doc-footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-meta { text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── COVER ── -->
+  <div class="cover">
+    <div class="cover-badge"><span>Hercules.app · Confidential</span></div>
+    <h1 class="cover-title">100-Day<br><em>Programmatic</em><br>SEO Plan</h1>
+    <p class="cover-sub">A multi-language, multi-industry content engine targeting small and medium businesses across 46 Stripe-integrated markets — powered by 5 core keywords, 200+ industries, and live working demos.</p>
+    <div class="cover-stats">
+      <div class="stat-box">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Core Keywords</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Industries</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">46</span>
+        <span class="stat-label">Stripe Markets</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">~30</span>
+        <span class="stat-label">Languages</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">Millions</span>
+        <span class="stat-label">Target Pages</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BIG IDEA ── -->
+  <div class="section">
+    <div class="section-label">01 — The User Journey</div>
+    <h2 class="section-title">From search query<br>to <em>paying customer.</em></h2>
+    <p class="lead">Every touchpoint in the funnel is engineered. The landing page educates. The live demo converts. The automatic banner captures. The moat is the demo — no competitor can replicate a fully working, industry-specific product on the first click.</p>
+
+    <div class="journey">
+      <div class="journey-steps">
+        <div class="journey-step">
+          <div class="step-num">Step 01</div>
+          <span class="step-icon">🔍</span>
+          <div class="step-title">Search Intent</div>
+          <div class="step-desc">"booking software for salon" — user knows their problem, not the solution</div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">Step 02</div>
+          <span class="step-icon">🤖</span>
+          <div class="step-title">Discovery</div>
+          <div class="step-desc">Found via Google SERP or AI answer engine (ChatGPT, Gemini, Perplexity)</div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">Step 03</div>
+          <span class="step-icon">📄</span>
+          <div class="step-title">Landing Page</div>
+          <div class="step-desc">Features, how-to guides, comparisons, FAQs, pricing — full detail page</div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">Step 04</div>
+          <span class="step-icon">⚡</span>
+          <div class="step-title">Live Demo</div>
+          <div class="step-desc">Real working Hercules instance for that exact industry. Auto-banner on entry.</div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">Step 05</div>
+          <span class="step-icon">✅</span>
+          <div class="step-title">Sign Up</div>
+          <div class="step-desc">CTA via banner → account creation → Stripe payment connects. Done.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stripe-note">
+      <span class="note-icon">💡</span>
+      <div><strong>Why 46 Stripe countries?</strong> Stripe is integrated directly into Hercules — so small businesses in these countries can <em>accept</em> payments from their customers using Hercules. We're not limiting who can sign up for Hercules. Anyone with a credit or debit card anywhere in the world can subscribe. The 46 countries define where local businesses can use Hercules to <strong>run their own payment operations.</strong></div>
+    </div>
+  </div>
+
+  <!-- ── 5 KEYWORDS ── -->
+  <div class="section">
+    <div class="section-label">02 — Core Keywords</div>
+    <h2 class="section-title">5 keywords.<br><em>No real moat.</em> That's the point.</h2>
+    <p class="lead">We target software categories that are essential to SMB revenue generation but have no lock-in. They're replaceable — like switching email providers. That means high search volume, constant churn from competitors, and buyers always open to something better.</p>
+
+    <div class="keywords-grid">
+      <div class="keyword-card">
+        <span class="kw-icon">📅</span>
+        <div class="kw-name">Booking Software</div>
+        <div class="kw-alt">+ Appointment Software</div>
+        <p class="kw-desc">Online scheduling for any service business. One of the highest search volume SMB software queries globally.</p>
+      </div>
+      <div class="keyword-card">
+        <span class="kw-icon">🧾</span>
+        <div class="kw-name">Invoicing Software</div>
+        <div class="kw-alt">+ Billing Software</div>
+        <p class="kw-desc">Create, send, and track invoices. Critical for any business that charges clients — near-universal need.</p>
+      </div>
+      <div class="keyword-card">
+        <span class="kw-icon">🌐</span>
+        <div class="kw-name">Website Maker</div>
+        <div class="kw-alt">+ Website Builder</div>
+        <p class="kw-desc">Every SMB needs a web presence. Massive search volume, extremely competitive — but Hercules' live demo changes the game.</p>
+      </div>
+      <div class="keyword-card">
+        <span class="kw-icon">🚀</span>
+        <div class="kw-name">Landing Page Maker</div>
+        <div class="kw-alt">+ Landing Page Builder</div>
+        <p class="kw-desc">Campaign-specific pages for lead gen, promotions, events. High intent, business-critical, easily replaced.</p>
+      </div>
+      <div class="keyword-card">
+        <span class="kw-icon">🛠️</span>
+        <div class="kw-name">Internal Tools</div>
+        <div class="kw-alt">+ Business Tools</div>
+        <p class="kw-desc">Dashboards, forms, databases for operations. Emerging category with growing SMB demand and low competition.</p>
+      </div>
+    </div>
+
+    <div class="no-moat-note">
+      <strong>The no-moat thesis:</strong> Unlike social media platforms, CRMs, or ERPs — these tools don't trap users with network effects or data lock-in. A salon owner switches booking software the same way they switch email clients. This means constant high-intent search traffic from businesses actively looking to change tools. That's our window.
+    </div>
+  </div>
+
+  <!-- ── THE MATH ── -->
+  <div class="section">
+    <div class="section-label">03 — The Opportunity</div>
+    <h2 class="section-title">The math<br><em>is absurd.</em></h2>
+    <p class="lead">Language is the first dimension — each language unlocks its own search universe with zero duplication from other languages. Then we multiply across keywords, industries, countries, and cities.</p>
+
+    <div class="math-wrap">
+      <div class="math-header">
+        <span class="math-title">Page Opportunity Matrix — Full Scale</span>
+        <span class="mono muted" style="font-size:11px;">Conservative estimate</span>
+      </div>
+      <div class="math-body">
+        <div class="math-layers">
+          <div class="math-layer">
+            <span class="ml-num">~30</span>
+            <div class="ml-label">Languages</div>
+            <div class="ml-detail">EN, ES, FR, DE, NL, PT, IT, JA, SV, NO, DA, FI, PL, CS, RO, HU, SK, SL, HR, BG, ET, LV, LT, HE, AR, MS, TH, ZH, AF, IS...</div>
+          </div>
+          <div class="math-layer">
+            <span class="ml-num">5</span>
+            <div class="ml-label">Keywords</div>
+            <div class="ml-detail">Booking, Invoicing, Website Maker, Landing Page, Internal Tools — each with alias variants</div>
+          </div>
+          <div class="math-layer">
+            <span class="ml-num">200+</span>
+            <div class="ml-label">Industries</div>
+            <div class="ml-detail">SMB: salon, hotel, restaurant, logistics, travel agent, clinic, gym, studio, retail, law firm, and hundreds more</div>
+          </div>
+          <div class="math-layer">
+            <span class="ml-num">460+</span>
+            <div class="ml-label">Cities</div>
+            <div class="ml-detail">~10 major cities per country × 46 Stripe markets. Expandable to thousands of smaller cities in high-volume markets</div>
+          </div>
+        </div>
+
+        <div class="math-equation">
+          <div class="eq-row">
+            <span class="eq-label muted">Language × Keyword (top-level)</span>
+            <span class="eq-formula">30 × 5</span>
+            <span class="eq-result accent">150</span>
+          </div>
+          <div class="eq-row">
+            <span class="eq-label muted">+ Industry layer</span>
+            <span class="eq-formula">30 × 5 × 200</span>
+            <span class="eq-result accent">30,000</span>
+          </div>
+          <div class="eq-row">
+            <span class="eq-label muted">+ Country layer (avg 1.3 lang/country)</span>
+            <span class="eq-formula">46 × 5 × 200 × 1.3</span>
+            <span class="eq-result accent">~60,000</span>
+          </div>
+          <div class="eq-row total">
+            <span class="eq-label">+ City layer (full rollout)</span>
+            <span class="eq-formula mono muted">460 cities × 5 × 200+ industries</span>
+            <span class="eq-result">Millions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INDUSTRIES ── -->
+  <div class="section">
+    <div class="section-label">04 — Target Industries (Phase 1 Top 20)</div>
+    <h2 class="section-title">Not just salons.<br><em>Every SMB.</em></h2>
+    <p class="lead">Phase 1 targets the highest search-volume SMB categories across hospitality, services, logistics, and professional sectors. Phase 2 expands to 200+.</p>
+
+    <div class="industries">
+      <div class="industry-item"><span class="ico">🏨</span><span class="name">Hotel & Hostel</span><span class="cat">Hospitality</span></div>
+      <div class="industry-item"><span class="ico">🍽️</span><span class="name">Restaurant</span><span class="cat">Food & Bev</span></div>
+      <div class="industry-item"><span class="ico">✈️</span><span class="name">Travel Agency</span><span class="cat">Travel</span></div>
+      <div class="industry-item"><span class="ico">🚚</span><span class="name">Logistics & Courier</span><span class="cat">Logistics</span></div>
+      <div class="industry-item"><span class="ico">💇</span><span class="name">Hair Salon</span><span class="cat">Beauty</span></div>
+      <div class="industry-item"><span class="ico">🦷</span><span class="name">Dental Clinic</span><span class="cat">Healthcare</span></div>
+      <div class="industry-item"><span class="ico">🏋️</span><span class="name">Gym & Fitness</span><span class="cat">Fitness</span></div>
+      <div class="industry-item"><span class="ico">📸</span><span class="name">Photography Studio</span><span class="cat">Creative</span></div>
+      <div class="industry-item"><span class="ico">🧘</span><span class="name">Yoga & Pilates</span><span class="cat">Wellness</span></div>
+      <div class="industry-item"><span class="ico">⚖️</span><span class="name">Law Firm</span><span class="cat">Professional</span></div>
+      <div class="industry-item"><span class="ico">🏗️</span><span class="name">Construction & Contractor</span><span class="cat">Trade</span></div>
+      <div class="industry-item"><span class="ico">🛒</span><span class="name">Retail Shop</span><span class="cat">Retail</span></div>
+      <div class="industry-item"><span class="ico">🎓</span><span class="name">Tutoring & Education</span><span class="cat">Education</span></div>
+      <div class="industry-item"><span class="ico">🚗</span><span class="name">Car Rental & Repair</span><span class="cat">Auto</span></div>
+      <div class="industry-item"><span class="ico">🐾</span><span class="name">Veterinary & Pet Care</span><span class="cat">Pet</span></div>
+      <div class="industry-item"><span class="ico">💻</span><span class="name">Freelance & Agency</span><span class="cat">Services</span></div>
+      <div class="industry-item"><span class="ico">🎪</span><span class="name">Event Planner</span><span class="cat">Events</span></div>
+      <div class="industry-item"><span class="ico">🏠</span><span class="name">Real Estate Agent</span><span class="cat">Property</span></div>
+      <div class="industry-item"><span class="ico">🧹</span><span class="name">Cleaning Service</span><span class="cat">Home Svcs</span></div>
+      <div class="industry-item"><span class="ico">🩺</span><span class="name">Physiotherapy & Clinic</span><span class="cat">Healthcare</span></div>
+    </div>
+  </div>
+
+  <!-- ── URL STRUCTURE ── -->
+  <div class="section">
+    <div class="section-label">05 — URL Architecture</div>
+    <h2 class="section-title">Six layers.<br><em>Infinite scale.</em></h2>
+    <p class="lead">A hierarchical URL structure that signals topical authority to Google at every depth. Language-first indexing unlocks separate search universes. Each layer multiplies the previous one.</p>
+
+    <div class="url-tree">
+      <div class="url-tree-header">URL Depth Map — hercules.app</div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L1</div>
+          <div class="depth-name">Language</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            hercules.app/<span class="url-var">{lang}</span>
+          </div>
+          <div class="url-example">→ hercules.app/en &nbsp;·&nbsp; hercules.app/es &nbsp;·&nbsp; hercules.app/fr &nbsp;·&nbsp; hercules.app/de &nbsp;·&nbsp; hercules.app/ja</div>
+          <span class="url-count">~30 pages</span>
+        </div>
+      </div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L2</div>
+          <div class="depth-name">Keyword</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            hercules.app/<span class="url-seg">{lang}</span>/build/<span class="url-var">{keyword}</span>
+          </div>
+          <div class="url-example">→ /en/build/booking-software &nbsp;·&nbsp; /en/build/invoicing-software &nbsp;·&nbsp; /en/build/website-maker</div>
+          <span class="url-count">~150 pages</span>
+        </div>
+      </div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L3</div>
+          <div class="depth-name">Industry</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            hercules.app/<span class="url-seg">{lang}/build/{keyword}</span>/<span class="url-var">{industry}</span>
+          </div>
+          <div class="url-example">→ /en/build/booking-software/hotel &nbsp;·&nbsp; /fr/build/logiciel-reservation/restaurant &nbsp;·&nbsp; /de/build/buchungssystem/salon</div>
+          <span class="url-count">~30,000 pages</span>
+        </div>
+      </div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L4</div>
+          <div class="depth-name">Country</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            hercules.app/<span class="url-seg">{lang}/build/{keyword}/{industry}</span>/<span class="url-var">{country}</span>
+          </div>
+          <div class="url-example">→ /en/build/booking-software/hotel/united-states &nbsp;·&nbsp; /en/build/booking-software/hotel/australia</div>
+          <span class="url-count">~60,000 pages</span>
+        </div>
+      </div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L5</div>
+          <div class="depth-name">City</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            hercules.app/<span class="url-seg">{lang}/build/{keyword}/{industry}/{country}</span>/<span class="url-var">{city}</span>
+          </div>
+          <div class="url-example">→ /en/build/booking-software/hotel/united-states/new-york &nbsp;·&nbsp; .../australia/sydney</div>
+          <span class="url-count">Millions of pages</span>
+        </div>
+      </div>
+
+      <div class="url-level">
+        <div class="url-depth">
+          <div class="depth-num">L6</div>
+          <div class="depth-name">Live Demo</div>
+        </div>
+        <div class="url-content">
+          <div class="url-pattern">
+            <span class="url-var">{industry-name}</span>.onhercules.app
+          </div>
+          <div class="url-example">→ luxesalon.onhercules.app &nbsp;·&nbsp; grandhotel.onhercules.app &nbsp;·&nbsp; swiftcourier.onhercules.app</div>
+          <span class="url-count">1 per industry</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      <strong>Live Demo backlink loop:</strong> Each pSEO landing page links to the live demo (onhercules.app). The live demo's automatic banner links back to the corresponding landing page. This creates a closed backlink loop between the main domain and the demo subdomain — reinforcing authority on both ends while keeping the URL structure clean and separate.
+    </div>
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <div class="section">
+    <div class="section-label">06 — The Roadmap</div>
+    <h2 class="section-title">100 days.<br><em>Three phases.</em></h2>
+    <p class="lead">Foundation locks in the content system. Scale fires the language and industry engine. Dominate makes Hercules the default answer across every search surface.</p>
+
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-sidebar">
+          <div class="phase-days">1–30</div>
+          <div class="phase-name">Foundation</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Finalize Top 20 SMB industries with keyword volume analysis</li>
+            <li>Build AI prompt templates for all 5 keyword types × all industries</li>
+            <li>Generate L3 pages: 20 industries × 5 keywords in English</li>
+            <li>Launch 20 live demos on .onhercules.app — one per industry</li>
+            <li>Set up URL structure, sitemap, hreflang architecture</li>
+            <li>Configure Google Search Console, PostHog, and QA eval pipeline</li>
+            <li>Implement automatic demo banner with CTA + backlink loop</li>
+            <li>Submit for indexing, track initial crawl rate</li>
+          </ul>
+          <div class="phase-goal">🎯 Target: 100 pages live · 20 live demos · English fully indexed</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-sidebar">
+          <div class="phase-days">31–60</div>
+          <div class="phase-name">Scale</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Expand to 100 industries — full AI batch generation</li>
+            <li>Launch Spanish (US Hispanic + Mexico + LATAM)</li>
+            <li>Launch French (France + Canada + Belgium + Switzerland)</li>
+            <li>Launch German (DE + AT + CH)</li>
+            <li>Add L4 country pages for all 46 Stripe markets in English</li>
+            <li>Add L5 city pages for US + UK (top 50 cities each)</li>
+            <li>Internal linking: keyword → industry → country → city hierarchy</li>
+            <li>AEO optimization — structured data, FAQ schema, entity markup</li>
+          </ul>
+          <div class="phase-goal">🎯 Target: ~5,000 pages · 4 languages · First organic signups tracked</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-sidebar">
+          <div class="phase-days">61–100</div>
+          <div class="phase-name">Dominate</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Expand to 200+ industries — logistics, travel, hospitality, professional</li>
+            <li>Launch Portuguese, Dutch, Italian, Japanese, Polish, Swedish</li>
+            <li>City layer rollout: all 46 countries × avg 10 cities</li>
+            <li>Analyze Search Console — double down on converting pages</li>
+            <li>Free tools as traffic magnets: invoice generator, booking widget embed</li>
+            <li>AEO tracking: Hercules mentions in ChatGPT, Gemini, Perplexity</li>
+            <li>PR angle: "Hercules has a live working demo for every type of business"</li>
+            <li>Case study pages: real customers by industry + measurable results</li>
+          </ul>
+          <div class="phase-goal">🎯 Target: ~30,000+ pages · 10+ languages · Ranking across 20+ countries</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COUNTRIES + LANGUAGES ── -->
+  <div class="section">
+    <div class="section-label">07 — Markets & Languages</div>
+    <h2 class="section-title">46 countries.<br><em>~30 languages.</em></h2>
+    <p class="lead">Every Stripe-supported country is a valid market — because Hercules runs on Stripe for payment operations. We launch English first across all 46, then roll out local languages by priority, unlocking new search universes with each one.</p>
+
+    <div class="countries-grid">
+      <div class="country-item"><span class="flag">🇺🇸</span>United States</div>
+      <div class="country-item"><span class="flag">🇬🇧</span>United Kingdom</div>
+      <div class="country-item"><span class="flag">🇦🇺</span>Australia</div>
+      <div class="country-item"><span class="flag">🇨🇦</span>Canada</div>
+      <div class="country-item"><span class="flag">🇳🇿</span>New Zealand</div>
+      <div class="country-item"><span class="flag">🇩🇪</span>Germany</div>
+      <div class="country-item"><span class="flag">🇫🇷</span>France</div>
+      <div class="country-item"><span class="flag">🇳🇱</span>Netherlands</div>
+      <div class="country-item"><span class="flag">🇨🇭</span>Switzerland</div>
+      <div class="country-item"><span class="flag">🇦🇹</span>Austria</div>
+      <div class="country-item"><span class="flag">🇧🇪</span>Belgium</div>
+      <div class="country-item"><span class="flag">🇸🇪</span>Sweden</div>
+      <div class="country-item"><span class="flag">🇳🇴</span>Norway</div>
+      <div class="country-item"><span class="flag">🇩🇰</span>Denmark</div>
+      <div class="country-item"><span class="flag">🇫🇮</span>Finland</div>
+      <div class="country-item"><span class="flag">🇮🇹</span>Italy</div>
+      <div class="country-item"><span class="flag">🇪🇸</span>Spain</div>
+      <div class="country-item"><span class="flag">🇵🇹</span>Portugal</div>
+      <div class="country-item"><span class="flag">🇮🇪</span>Ireland</div>
+      <div class="country-item"><span class="flag">🇸🇬</span>Singapore</div>
+      <div class="country-item"><span class="flag">🇯🇵</span>Japan</div>
+      <div class="country-item"><span class="flag">🇭🇰</span>Hong Kong</div>
+      <div class="country-item"><span class="flag">🇲🇾</span>Malaysia</div>
+      <div class="country-item"><span class="flag">🇹🇭</span>Thailand</div>
+      <div class="country-item"><span class="flag">🇵🇭</span>Philippines</div>
+      <div class="country-item"><span class="flag">🇧🇷</span>Brazil</div>
+      <div class="country-item"><span class="flag">🇲🇽</span>Mexico</div>
+      <div class="country-item"><span class="flag">🇨🇿</span>Czech Republic</div>
+      <div class="country-item"><span class="flag">🇵🇱</span>Poland</div>
+      <div class="country-item"><span class="flag">🇷🇴</span>Romania</div>
+      <div class="country-item"><span class="flag">🇮🇱</span>Israel</div>
+      <div class="country-item"><span class="flag">🇦🇪</span>UAE</div>
+      <div class="country-item"><span class="flag">🇿🇦</span>South Africa</div>
+      <div class="country-item"><span class="flag">🇪🇪</span>Estonia</div>
+      <div class="country-item"><span class="flag">🇱🇻</span>Latvia</div>
+      <div class="country-item"><span class="flag">🇱🇹</span>Lithuania</div>
+      <div class="country-item"><span class="flag">🇭🇺</span>Hungary</div>
+      <div class="country-item"><span class="flag">🇸🇰</span>Slovakia</div>
+      <div class="country-item"><span class="flag">🇸🇮</span>Slovenia</div>
+      <div class="country-item"><span class="flag">🇭🇷</span>Croatia</div>
+      <div class="country-item"><span class="flag">🇧🇬</span>Bulgaria</div>
+      <div class="country-item"><span class="flag">🇨🇾</span>Cyprus</div>
+      <div class="country-item"><span class="flag">🇲🇹</span>Malta</div>
+      <div class="country-item"><span class="flag">🇬🇮</span>Gibraltar</div>
+      <div class="country-item"><span class="flag">🇱🇺</span>Luxembourg</div>
+      <div class="country-item"><span class="flag">🇮🇸</span>Iceland</div>
+    </div>
+
+    <div class="lang-note">
+      <h4>Language Rollout Priority</h4>
+      <div class="lang-list">
+        <span class="lang-tag p1">🇬🇧 English</span>
+        <span class="lang-tag p1">🇪🇸 Spanish</span>
+        <span class="lang-tag p1">🇫🇷 French</span>
+        <span class="lang-tag p1">🇩🇪 German</span>
+        <span class="lang-tag p1">🇧🇷 Portuguese</span>
+        <span class="lang-tag p2">🇮🇹 Italian</span>
+        <span class="lang-tag p2">🇯🇵 Japanese</span>
+        <span class="lang-tag p2">🇳🇱 Dutch</span>
+        <span class="lang-tag p2">🇸🇪 Swedish</span>
+        <span class="lang-tag p2">🇵🇱 Polish</span>
+        <span class="lang-tag p2">🇹🇭 Thai</span>
+        <span class="lang-tag p2">🇲🇾 Malay</span>
+        <span class="lang-tag">🇨🇿 Czech</span>
+        <span class="lang-tag">🇷🇴 Romanian</span>
+        <span class="lang-tag">🇮🇱 Hebrew</span>
+        <span class="lang-tag">🇦🇪 Arabic</span>
+        <span class="lang-tag">🇿🇦 Afrikaans</span>
+        <span class="lang-tag">🇭🇺 Hungarian</span>
+        <span class="lang-tag">🇭🇷 Croatian</span>
+        <span class="lang-tag">🇫🇮 Finnish</span>
+        <span class="lang-tag">🇮🇸 Icelandic</span>
+        <span class="lang-tag">🇵🇭 Filipino</span>
+        <span class="lang-tag">🇭🇰 Chinese (HK)</span>
+        <span class="lang-tag">+ more...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AEO ── -->
+  <div class="section">
+    <div class="section-label">08 — AEO / GEO Strategy</div>
+    <h2 class="section-title">Beyond Google.<br><em>Own AI answers too.</em></h2>
+    <p class="lead">Search behavior is shifting. SMB owners increasingly ask AI assistants for software recommendations. Hercules needs to be the answer not just on Google, but everywhere a recommendation can be served.</p>
+
+    <div class="aeo-grid">
+      <div class="aeo-card">
+        <div class="aeo-engine">ChatGPT / SearchGPT</div>
+        <p>Bing-indexed content feeds into OpenAI's answer layer. Clear entity definitions, feature lists, and comparison pages increase citation probability when users ask "best booking software for hotels."</p>
+      </div>
+      <div class="aeo-card">
+        <div class="aeo-engine">Google Gemini / AI Overviews</div>
+        <p>Strong E-E-A-T signals + structured FAQ schema = citations in AI Overviews. Our industry-specific depth — real content per vertical, not generic — is exactly what Gemini sources favor.</p>
+      </div>
+      <div class="aeo-card">
+        <div class="aeo-engine">Perplexity</div>
+        <p>Perplexity rewards specific, fact-dense content with concrete feature comparisons and pricing. Our pSEO pages naturally fit this pattern — and citations here drive high-intent traffic.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECTIONS ── -->
+  <div class="section">
+    <div class="section-label">09 — Page Projections</div>
+    <h2 class="section-title">Scale by<br><em>day 100.</em></h2>
+    <p class="lead">Each phase compounds. By day 100 the content engine runs at full speed and the city layer beyond can be deployed country by country as a pure automation operation.</p>
+
+    <div class="projection">
+      <div class="proj-header">
+        <span>Milestone</span>
+        <span>Industries</span>
+        <span>Languages</span>
+        <span>Depth</span>
+        <span>Est. Pages</span>
+      </div>
+      <div class="proj-row">
+        <span><strong>Day 30</strong><span class="phase-tag" style="background:rgba(240,192,64,0.09);color:var(--accent)">Foundation</span></span>
+        <span class="muted">20</span>
+        <span class="muted">1 (EN)</span>
+        <span class="muted">L3 only</span>
+        <span class="total accent">~100</span>
+      </div>
+      <div class="proj-row">
+        <span><strong>Day 60</strong><span class="phase-tag" style="background:rgba(232,133,90,0.09);color:var(--accent2)">Scale</span></span>
+        <span class="muted">100</span>
+        <span class="muted">4 (EN/ES/FR/DE)</span>
+        <span class="muted">L3 + L4 + L5 (US/UK)</span>
+        <span class="total accent">~5,000</span>
+      </div>
+      <div class="proj-row">
+        <span><strong>Day 100</strong><span class="phase-tag" style="background:rgba(90,180,232,0.09);color:var(--accent3)">Dominate</span></span>
+        <span class="muted">200+</span>
+        <span class="muted">10+ languages</span>
+        <span class="muted">L3 + L4 + L5 all markets</span>
+        <span class="total accent">~30,000+</span>
+      </div>
+      <div class="proj-row">
+        <span><strong>Post 100</strong><span class="phase-tag" style="background:rgba(74,222,128,0.09);color:var(--green)">City Full Rollout</span></span>
+        <span class="muted">200+</span>
+        <span class="muted">~30 languages</span>
+        <span class="muted">All 6 layers live</span>
+        <span class="total green">Millions</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LANDING PAGE CONTENTS ── -->
+  <div class="section">
+    <div class="section-label">10 — Landing Page Contents</div>
+    <h2 class="section-title">What lives on<br><em>each layer.</em></h2>
+    <p class="lead">Every URL depth has a distinct content job. Shallower pages build topical authority and funnel visitors deeper. Deeper pages close with hyper-local, hyper-specific proof. Each layer inherits and extends the one above it.</p>
+
+    <div class="lpc-stack">
+
+      <!-- L1 -->
+      <div class="lpc-card">
+        <div class="lpc-left l1">
+          <div class="lpc-depth">L1</div>
+          <div class="lpc-layer-name">Language<br>Homepage</div>
+          <div class="lpc-url mono">/en &nbsp;/es &nbsp;/fr</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What goes on this page</div>
+          <p class="lpc-desc">The language-specific entry point to the entire Hercules universe. Introduces Hercules in the visitor's native language, immediately orienting them around what they can build. The primary job is navigation — not conversion.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">Hero</div>
+              <div class="lpc-block-body">Headline in native language. "Build any app or website with AI — in minutes." CTA to start building.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">What You Can Build</div>
+              <div class="lpc-block-body">Linked grid of all 5 keyword categories: Booking Software, Invoicing, Website Maker, Landing Page, Internal Tools — each card links to L2.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Social Proof</div>
+              <div class="lpc-block-body">Global testimonials, customer logos, "scales to millions of users" trust signal.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Top Features</div>
+              <div class="lpc-block-body">Domains, Auth, Payments, Database, Mobile, AI Gateway, Analytics — all built-in, no plugins needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L2 -->
+      <div class="lpc-card">
+        <div class="lpc-left l2">
+          <div class="lpc-depth">L2</div>
+          <div class="lpc-layer-name">Keyword<br>Page</div>
+          <div class="lpc-url mono">/en/build/<br>booking-software</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What goes on this page</div>
+          <p class="lpc-desc">The keyword authority page. Targets the broad search intent ("booking software") and comprehensively answers what Hercules offers for that specific software type. Ranks for head terms, funnels into L3 by industry.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">Hero + Value Prop</div>
+              <div class="lpc-block-body">Keyword-specific headline: "Build Your Own Booking Software with AI — No Code Required." What makes Hercules uniquely suited for this.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Feature Deep Dive</div>
+              <div class="lpc-block-body">All Hercules features relevant to this keyword: Auth & user accounts, Stripe payments, Database for bookings, Email confirmations, Push notifications, Mobile app publish, Branding & SEO, Analytics dashboard, AI agent to build it in minutes.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Industry Directory</div>
+              <div class="lpc-block-body">Grid of 200+ industries that need this software — each links to its L3 page. "Booking software for hotels, salons, gyms, clinics, travel agents..."</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">How It Works</div>
+              <div class="lpc-block-body">Step-by-step: describe your app → AI builds it → customize → publish → accept payments. With screenshots or demo embed.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">FAQ</div>
+              <div class="lpc-block-body">Structured FAQ schema targeting long-tail questions: "Can I add Stripe payments to my booking software?" "Does it work on mobile?" "How long does it take?"</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Pricing</div>
+              <div class="lpc-block-body">Clear pricing with CTA. "Start building your booking software free."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L3 -->
+      <div class="lpc-card">
+        <div class="lpc-left l3">
+          <div class="lpc-depth">L3</div>
+          <div class="lpc-layer-name">Industry<br>Page</div>
+          <div class="lpc-url mono">/en/build/<br>booking-software<br>/hotel</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What goes on this page</div>
+          <p class="lpc-desc">The first layer where a visitor feels seen. The page speaks entirely about their specific industry — hotel booking software, not generic software. Live demo link appears here for the first time. Industry-specific proof is the conversion engine.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">Industry Hero + Live Demo CTA</div>
+              <div class="lpc-block-body">"Build Hotel Booking Software with AI." Prominent live demo button → opens grandhotel.onhercules.app with automatic signup banner overlaid.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Industry-Specific Features</div>
+              <div class="lpc-block-body">Not generic features — framed for hotels: "Room availability calendar," "Guest check-in auth," "Stripe payment for bookings," "Automated email confirmations," "Mobile-ready for guests," "Multi-room database." All powered by Hercules core features.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Why Hercules for Hotels</div>
+              <div class="lpc-block-body">Specific pain points: hotel booking software is expensive, requires a developer, takes months. Hercules: AI builds it in minutes, no code, all features included, fraction of the cost.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Benefits for This Industry</div>
+              <div class="lpc-block-body">Quantified benefits specific to hotel operators: reduce no-shows with automated reminders, accept deposits via Stripe, own your booking system instead of paying 15% to OTAs, launch a mobile app for guests.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Industry Examples & Case Studies</div>
+              <div class="lpc-block-body">Screenshots from the live demo, or real customer examples from hotel operators using Hercules. Social proof from this exact niche.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Location Links</div>
+              <div class="lpc-block-body">Grid linking to L4 country pages: "Hotel booking software in United States · Australia · United Kingdom · Germany..." — boosts internal link architecture.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L4 -->
+      <div class="lpc-card">
+        <div class="lpc-left l4">
+          <div class="lpc-depth">L4</div>
+          <div class="lpc-layer-name">Country<br>Page</div>
+          <div class="lpc-url mono">/en/build/<br>booking-software<br>/hotel<br>/united-states</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What goes on this page</div>
+          <p class="lpc-desc">Everything from L3 plus country-specific market intelligence. This page proves that Hercules understands the local landscape — regulations, market size, trends — and is built to help businesses in that country specifically win.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">Country Market Data</div>
+              <div class="lpc-block-body">Hotel industry statistics for the US: market size, number of hotels, average occupancy rates, online booking adoption percentage. Signals E-E-A-T and local relevance.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Local Industry Trends</div>
+              <div class="lpc-block-body">What's happening in US hotel industry right now: OTA dependency, direct booking growth, guest tech expectations. Frame Hercules as the answer to these specific trends.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Country-Specific Hercules Fit</div>
+              <div class="lpc-block-body">Stripe payment support in USD. Publish to .com domain. US-based guest experience expectations. GDPR-equivalent compliance notes where relevant (CCPA for US).</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Why Win in This Market</div>
+              <div class="lpc-block-body">US-specific opportunity: thousands of independent hotels losing 15–20% to Booking.com and Expedia. Hercules lets them own their booking flow and keep the margin.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">City Directory</div>
+              <div class="lpc-block-body">Links to all L5 city pages: New York, Los Angeles, Chicago, Houston, Miami, Las Vegas... Each city is a new ranking opportunity and deepens the authority signal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L5 -->
+      <div class="lpc-card">
+        <div class="lpc-left l5">
+          <div class="lpc-depth">L5</div>
+          <div class="lpc-layer-name">City<br>Page</div>
+          <div class="lpc-url mono">/en/build/<br>booking-software<br>/hotel<br>/united-states<br>/new-york</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What goes on this page</div>
+          <p class="lpc-desc">The most conversion-ready page in the entire tree. Hyper-local, hyper-specific. This visitor is a hotel owner in New York actively searching for a solution — the page speaks directly to them, names their competitors, and shows how Hercules beats them locally.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">City-Specific Hero</div>
+              <div class="lpc-block-body">"Build Hotel Booking Software for New York" — immediately signals this page was made for them. Live demo CTA prominent above the fold.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Local Competitor List</div>
+              <div class="lpc-block-body">Scraped from Google Maps: top 10–20 hotels in New York. Not to expose competitors — but to show context. "Join hotels like [X] and [Y] who've cut OTA dependency by building direct booking." Hyperlocal proof.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">City-Specific Features</div>
+              <div class="lpc-block-body">New York–specific content: high tourist volume → mobile-first booking is critical. Multi-language guest support (NYC is international). NYC tax handling in Stripe. Neighborhood-based search features.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Local SEO Guidance</div>
+              <div class="lpc-block-body">How to win local search in NYC: Google Business profile integration, local schema markup, "hotel booking New York" keyword targeting built into the Hercules-generated site from day one via Branding & SEO feature.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Serve Customers Better in NYC</div>
+              <div class="lpc-block-body">NYC guests expect: instant confirmation, mobile app, multilingual support, easy rescheduling. Hercules delivers: Push notifications, Internationalization, Auth & self-service portal, AI-powered concierge potential via AI Gateway.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">CTA + Live Demo</div>
+              <div class="lpc-block-body">Final CTA with the live hotel demo. "See how a New York hotel booking system built on Hercules looks — live, functional, yours in minutes."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L6 -->
+      <div class="lpc-card">
+        <div class="lpc-left l6">
+          <div class="lpc-depth">L6</div>
+          <div class="lpc-layer-name">Live Demo<br>Layer</div>
+          <div class="lpc-url mono">grandhotel.<br>onhercules.app</div>
+        </div>
+        <div class="lpc-right">
+          <div class="lpc-title">What lives inside the live demo</div>
+          <p class="lpc-desc">The demo is not just a product preview — it's a fully functioning Hercules app, pre-built for that industry, embodying everything described on L1 through L5. It also demonstrates Hercules' own internationalization feature by being multilingual by default.</p>
+          <div class="lpc-blocks">
+            <div class="lpc-block">
+              <div class="lpc-block-title">Automatic Signup Banner</div>
+              <div class="lpc-block-body">Persistent but non-intrusive overlay on every page of the demo. "You're looking at a real Hercules app. Start building yours →" — links back to the relevant L3/L4/L5 landing page (closing the backlink loop).</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Full Industry Experience (L3)</div>
+              <div class="lpc-block-body">Working booking/invoicing/website — whichever keyword applies. Real UI, real flows, real Stripe test payments, real auth. Not a mockup. Everything described on the landing page is demonstrably true here.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Multilingual Toggle (L1 echo)</div>
+              <div class="lpc-block-body">The demo switches between EN, ES, FR, DE and more using Hercules' Internationalization feature. Proves multilingual capability in-product — critical for markets where guests/clients speak different languages.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Country & City Context (L4/L5 echo)</div>
+              <div class="lpc-block-body">Demo is pre-populated with realistic city/country data. Hotel demo shows New York addresses, USD pricing, US phone formats. Salon demo shows London postcodes and GBP. Makes the experience feel personal, not generic.</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Feature Callouts</div>
+              <div class="lpc-block-body">Tooltips or a collapsible sidebar that maps visible features back to Hercules capabilities: "This booking calendar → Hercules Database. This payment → Stripe via Hercules Payments. This mobile view → Hercules Mobile Publish."</div>
+            </div>
+            <div class="lpc-block">
+              <div class="lpc-block-title">Backlink Loop</div>
+              <div class="lpc-block-body">Footer + banner link back to: the L3 industry page, the L4 country page, and the L5 city page if available. Distributes link equity back to the main domain and strengthens the full content hierarchy.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ORGANIC TRAFFIC PROJECTION ── -->
+  <div class="section">
+    <div class="section-label">11 — Organic Traffic Projection</div>
+    <h2 class="section-title">The traffic<br><em>math is real.</em></h2>
+    <p class="lead">Based on actual keyword research for just one keyword cluster — "booking system" variants in English only. This is the conservative floor. Multiply across 5 keywords, 200+ industries, and 30 languages and the ceiling becomes extraordinary.</p>
+
+    <!-- KEYWORD SAMPLE TABLE -->
+    <div class="kw-sample">
+      <div class="kws-header">
+        <span class="kws-title mono accent">Sample: "booking system" · English only · 16 industry variants shown</span>
+        <span class="kws-note mono muted">Source: Ubersuggest (via Google Keyword Planner + Google Suggest APIs) · All Locations · English</span>
+      </div>
+      <div class="kws-table">
+        <div class="kws-row kws-head">
+          <span>Keyword</span>
+          <span>Vol/mo</span>
+          <span>CPC</span>
+          <span>PD</span>
+          <span>Opportunity</span>
+        </div>
+        <div class="kws-row kws-top">
+          <span>meeting room booking system</span>
+          <span class="accent">4,400</span>
+          <span class="green">$14.31</span>
+          <span><div class="pd-bar"><div style="width:59%"></div></div><span class="pd-num">59</span></span>
+          <span><div class="opp-tag opp-med">Medium</div></span>
+        </div>
+        <div class="kws-row kws-top">
+          <span>booking system for restaurant</span>
+          <span class="accent">3,600</span>
+          <span class="green">$17.98</span>
+          <span><div class="pd-bar"><div style="width:43%"></div></div><span class="pd-num">43</span></span>
+          <span><div class="opp-tag opp-high">High</div></span>
+        </div>
+        <div class="kws-row kws-top">
+          <span>hotel booking system</span>
+          <span class="accent">2,900</span>
+          <span class="green">$9.00</span>
+          <span><div class="pd-bar"><div style="width:38%"></div></div><span class="pd-num">38</span></span>
+          <span><div class="opp-tag opp-high">High</div></span>
+        </div>
+        <div class="kws-row kws-top">
+          <span>salon booking system</span>
+          <span class="accent">2,900</span>
+          <span class="green">$13.40</span>
+          <span><div class="pd-bar"><div style="width:60%"></div></div><span class="pd-num">60</span></span>
+          <span><div class="opp-tag opp-med">Medium</div></span>
+        </div>
+        <div class="kws-row">
+          <span>small business booking system</span>
+          <span class="muted">1,300</span>
+          <span class="green">$17.03</span>
+          <span><div class="pd-bar"><div style="width:67%"></div></div><span class="pd-num">67</span></span>
+          <span><div class="opp-tag opp-med">Medium</div></span>
+        </div>
+        <div class="kws-row">
+          <span>vehicle booking system</span>
+          <span class="muted">720</span>
+          <span class="muted">$4.58</span>
+          <span><div class="pd-bar pd-low"><div style="width:15%"></div></div><span class="pd-num accent3">15</span></span>
+          <span><div class="opp-tag opp-win">Quick Win</div></span>
+        </div>
+        <div class="kws-row">
+          <span>booking system for gym</span>
+          <span class="muted">390</span>
+          <span class="green">$15.31</span>
+          <span><div class="pd-bar pd-low"><div style="width:22%"></div></div><span class="pd-num accent3">22</span></span>
+          <span><div class="opp-tag opp-win">Quick Win</div></span>
+        </div>
+        <div class="kws-row">
+          <span>booking system for hairdressers</span>
+          <span class="muted">390</span>
+          <span class="green" style="color:#F87171">$25.13</span>
+          <span><div class="pd-bar"><div style="width:78%"></div></div><span class="pd-num">78</span></span>
+          <span><div class="opp-tag opp-med">Medium</div></span>
+        </div>
+        <div class="kws-row">
+          <span>doctor appointment booking system</span>
+          <span class="muted">390</span>
+          <span class="muted">$2.02</span>
+          <span><div class="pd-bar pd-low"><div style="width:20%"></div></div><span class="pd-num accent3">20</span></span>
+          <span><div class="opp-tag opp-win">Quick Win</div></span>
+        </div>
+        <div class="kws-row">
+          <span>yoga booking system</span>
+          <span class="muted">320</span>
+          <span class="green">$16.56</span>
+          <span><div class="pd-bar pd-low"><div style="width:7%"></div></div><span class="pd-num accent3">7</span></span>
+          <span><div class="opp-tag opp-win">Quick Win ⚡</div></span>
+        </div>
+        <div class="kws-row kws-more">
+          <span class="muted">+ 190 more industry variants in English alone...</span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHT CALLOUTS -->
+    <div class="insight-row">
+      <div class="insight-card">
+        <div class="insight-icon">🎯</div>
+        <div class="insight-num accent">PD 1–22</div>
+        <div class="insight-label">Immediate ranking targets</div>
+        <p class="insight-body">Vehicle (PD 15), gym (PD 22), doctor (PD 20), yoga (PD 7), home affairs (PD 1) — low difficulty pages that can rank in weeks, not months. These are the first 100 pages we build.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">💰</div>
+        <div class="insight-num" style="color:#F87171">$25.13 CPC</div>
+        <div class="insight-label">Hairdresser keyword</div>
+        <p class="insight-body">High CPC = high commercial intent = businesses actively spending to reach these searchers. Organic ranking on high-CPC keywords delivers traffic that paid competitors are paying $14–$25 per click for.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">🌍</div>
+        <div class="insight-num accent3">×30</div>
+        <div class="insight-label">Language multiplier</div>
+        <p class="insight-body">Every keyword shown here exists in 30 languages. "Système de réservation pour salon" · "Buchungssystem für Salon" · "Sistema de reservas para salón" — each a separate search universe, each with its own volume.</p>
+      </div>
+    </div>
+
+    <!-- PROJECTION MODEL -->
+    <div class="proj-model">
+      <div class="pm-header">
+        <span class="pm-title mono accent">Traffic Projection Model — Conservative Estimates</span>
+        <span class="pm-note mono muted">Avg CTR: position 1–3 = 10% · position 4–10 = 3% · new pages = 1%</span>
+      </div>
+
+      <div class="pm-phases">
+
+        <div class="pm-phase">
+          <div class="pm-phase-label" style="color:var(--accent)">Day 30 · Foundation</div>
+          <div class="pm-calc-row">
+            <div class="pm-input">
+              <span class="pm-input-num">100</span>
+              <span class="pm-input-lbl">pages live</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">~300</span>
+              <span class="pm-input-lbl">avg searches/page/mo</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">1%</span>
+              <span class="pm-input-lbl">new page CTR</span>
+            </div>
+            <div class="pm-equals">=</div>
+            <div class="pm-result">
+              <span class="pm-result-num accent">~300</span>
+              <span class="pm-result-lbl">visits/mo</span>
+            </div>
+          </div>
+          <div class="pm-note-text">Baseline. Pages freshly indexed, no authority yet. Starting point for growth tracking.</div>
+        </div>
+
+        <div class="pm-phase">
+          <div class="pm-phase-label" style="color:var(--accent2)">Day 60 · Scale</div>
+          <div class="pm-calc-row">
+            <div class="pm-input">
+              <span class="pm-input-num">5,000</span>
+              <span class="pm-input-lbl">pages live</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">~400</span>
+              <span class="pm-input-lbl">avg searches/page/mo</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">2–3%</span>
+              <span class="pm-input-lbl">maturing CTR</span>
+            </div>
+            <div class="pm-equals">=</div>
+            <div class="pm-result">
+              <span class="pm-result-num accent2">~4,000–6,000</span>
+              <span class="pm-result-lbl">visits/mo</span>
+            </div>
+          </div>
+          <div class="pm-note-text">4 languages live. Early quick-win pages (PD &lt;25) starting to rank. First conversion data coming in.</div>
+        </div>
+
+        <div class="pm-phase">
+          <div class="pm-phase-label" style="color:var(--accent3)">Day 100 · Dominate</div>
+          <div class="pm-calc-row">
+            <div class="pm-input">
+              <span class="pm-input-num">30,000+</span>
+              <span class="pm-input-lbl">pages live</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">~400</span>
+              <span class="pm-input-lbl">avg searches/page/mo</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">3–5%</span>
+              <span class="pm-input-lbl">established CTR</span>
+            </div>
+            <div class="pm-equals">=</div>
+            <div class="pm-result">
+              <span class="pm-result-num accent3">~40,000–60,000</span>
+              <span class="pm-result-lbl">visits/mo</span>
+            </div>
+          </div>
+          <div class="pm-note-text">10+ languages live. Domain authority compounding. City pages adding long-tail volume. AI answer engine citations beginning.</div>
+        </div>
+
+        <div class="pm-phase pm-phase-final">
+          <div class="pm-phase-label" style="color:var(--green)">Post Day 100 · City Full Rollout</div>
+          <div class="pm-calc-row">
+            <div class="pm-input">
+              <span class="pm-input-num">Millions</span>
+              <span class="pm-input-lbl">pages indexed</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">~150</span>
+              <span class="pm-input-lbl">avg searches/city page/mo</span>
+            </div>
+            <div class="pm-input">
+              <span class="pm-input-num">5–10%</span>
+              <span class="pm-input-lbl">authority CTR</span>
+            </div>
+            <div class="pm-equals">=</div>
+            <div class="pm-result">
+              <span class="pm-result-num green">500K–1M+</span>
+              <span class="pm-result-lbl">visits/mo potential</span>
+            </div>
+          </div>
+          <div class="pm-note-text">Full city layer live across 46 countries × 30 languages. Compounding domain authority. AEO citations from AI engines adding non-search traffic on top.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM CALLOUT -->
+    <div class="traffic-footer">
+      <div class="tf-card">
+        <div class="tf-icon">📊</div>
+        <div>
+          <div class="tf-title">This model uses only "booking system" data</div>
+          <p class="tf-body">The screenshot shows one cluster of one keyword in one language. Invoicing software, website makers, landing page builders, and internal tools each have comparable keyword universes. Total addressable search volume across all 5 keywords × 30 languages is orders of magnitude larger than any single projection row above.</p>
+        </div>
+      </div>
+      <div class="tf-card">
+        <div class="tf-icon">⚡</div>
+        <div>
+          <div class="tf-title">Quick wins available from day one</div>
+          <p class="tf-body">Keywords with PD under 25 — yoga booking system (PD 7), home affairs (PD 1), vehicle booking (PD 15), doctor appointment (PD 20) — can realistically rank within weeks of publishing. These seed the authority engine that lifts the harder keywords over time.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ABOUT ME ── -->
+  <div class="section">
+    <div class="section-label">12 — Who's Behind This Plan</div>
+    <h2 class="section-title">Why I can<br><em>actually deliver this.</em></h2>
+    <p class="lead">This isn't a strategy deck from someone who's theorized about programmatic SEO. Every system described in this document maps directly to something I've already built, shipped, and ranked.</p>
+
+    <div class="about-hero">
+      <div class="about-intro">
+        <div class="about-name-block">
+          <div class="about-name">Fauzi <em>Abdillah</em></div>
+          <div class="about-title-tag">Programmatic SEO & GEO Developer</div>
+          <div class="about-location mono muted">📍 Pangandaran, Indonesia · Night owl · UTC+7</div>
+        </div>
+        <p class="about-bio">I build pages that build themselves. I specialize in crafting programmatic SEO and AI-SEO (GEO — Generative Engine Optimization) systems that generate thousands of high-ranking pages from structured data, templates, and automation — turning keyword matrices into organic traffic machines that perform across both traditional search engines and AI-powered answer engines.</p>
+        <p class="about-bio">For Hercules, this plan isn't abstract — it's a direct extension of the same systems I've already shipped across multiple clients, scaled to a product with unlimited AI budget, engineering resources, and a live demo moat nobody else has.</p>
+        <div class="about-links">
+          <a href="https://fauzi.pages.dev" class="about-link" target="_blank">🌐 fauzi.pages.dev</a>
+          <a href="https://contra.com/fauziabdillah" class="about-link" target="_blank">💼 Contra Profile</a>
+          <a href="https://linkedin.com/in/fauziabdh" class="about-link" target="_blank">🔗 LinkedIn</a>
+          <a href="https://x.com/fauziabdh" class="about-link" target="_blank">𝕏 @fauziabdh</a>
+        </div>
+      </div>
+      <div class="about-reviews">
+        <div class="about-review-label mono muted">Client Reviews · All 5.0 ★</div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Fauzi is a very impressive developer. He was able to help with a programmatic SEO project, from gathering and sorting the data to building out the site on WordPress and making it look and function great on the front end."</p>
+          <div class="review-author">Jake C. · <span class="muted">United States · Full Stack Database Site</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Fauzi is one of the best freelancers I have ever worked with. Extremely communicative and diligent. Completed my project exactly as wanted."</p>
+          <div class="review-author">Sandeep · <span class="muted">United States · Programmatic SEO Build Out</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"It's easy to work with Fauzi. He's skillful, gives honest feedback and delivers stellar work."</p>
+          <div class="review-author">Hogni · <span class="muted">Denmark · Localized Landing Pages</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROOF: PORTFOLIO -->
+    <div class="section-label" style="margin-top:48px">Proof of Work — Shipped Projects</div>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="port-flag">🇦🇺</div>
+        <div class="port-name">PetsOnline.com.au</div>
+        <div class="port-type mono">Directory · WordPress</div>
+        <p class="port-desc">Built the full programmatic directory system for Australia's largest pet breeder directory. 3D matrix: pet type × breed × location. Multi-directional interlinking. Organic search drives ~59% of all traffic.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">25K+</span> pages</span>
+          <span class="port-stat"><span class="accent">250+</span> breeds</span>
+          <span class="port-stat"><span class="green">~59%</span> organic</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="port-flag">🌐</div>
+        <div class="port-name">Geonode.com</div>
+        <div class="port-type mono">Landing Pages · Next.js SSG</div>
+        <p class="port-desc">Programmatic landing page system for a premium proxy provider. 230+ country/use-case pages via Next.js SSG. Built free tools (IP checker, proxy list) as traffic magnets with upsell mechanics.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">230+</span> pages</span>
+          <span class="port-stat"><span class="accent">190+</span> countries</span>
+          <span class="port-stat"><span class="green">2M+</span> IPs in network</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="port-flag">🇩🇰</div>
+        <div class="port-name">Faa3tilbud.dk</div>
+        <div class="port-type mono">Lead Gen · WordPress + Elementor</div>
+        <p class="port-desc">Programmatic landing page system for a Danish home improvement platform. 27 trade categories × 200+ cities = ~5,000 unique pages, each enriched with real Google Business listings and localized FAQs.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">~5K</span> pages</span>
+          <span class="port-stat"><span class="accent">27×200</span> matrix</span>
+          <span class="port-stat"><span class="green">5+</span> affiliate partners</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="port-flag">💬</div>
+        <div class="port-name">TextWiseAI.com</div>
+        <div class="port-type mono">AI App · Next.js · Byword.ai</div>
+        <p class="port-desc">Designed and built the full pSEO content system for an AI dating coach app. Dual-channel: UGC-style feed + keyword variant farming across Tinder, Bumble, Snapchat. All funneling to App Store installs.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">~64</span> pages</span>
+          <span class="port-stat"><span class="accent">2</span> content channels</span>
+          <span class="port-stat"><span class="green">1</span> free tool built</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="port-flag">🍔</div>
+        <div class="port-name">DDDNearMe.com</div>
+        <div class="port-type mono">Directory · WordPress CPT</div>
+        <p class="port-desc">Turned 37 seasons of Guy Fieri's "Diners, Drive-ins and Dives" into a multi-taxonomy directory. 1,500 restaurants interlinking across location, cuisine, and season dimensions.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">1,500+</span> listings</span>
+          <span class="port-stat"><span class="accent">37</span> seasons</span>
+          <span class="port-stat"><span class="green">3</span> taxonomy dims</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card port-hercules">
+        <div class="port-flag">⚡</div>
+        <div class="port-name">luxesalon.onhercules.app</div>
+        <div class="port-type mono">Live Demo · Hercules.app</div>
+        <p class="port-desc">Built as a proof-of-concept for this exact strategy. A fully functional salon booking demo on Hercules — the foundation of the live demo layer described throughout this plan.</p>
+        <div class="port-stats">
+          <span class="port-stat"><span class="accent">Built</span> before interview</span>
+          <span class="port-stat"><span class="green">Live</span> right now</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- WHY I CAN DELIVER -->
+    <div class="section-label" style="margin-top:48px">Why I Can Actually Deliver This</div>
+    <h3 class="deliver-heading">Not <em>just</em> a strategist.<br>Also a <em>builder.</em></h3>
+    <div class="deliver-grid">
+      <div class="deliver-card">
+        <div class="deliver-num">01</div>
+        <div class="deliver-content">
+          <div class="deliver-title">I build pSEO systems, not just pages</div>
+          <p class="deliver-body">Every project I've shipped is a <em>system</em> — a data pipeline → template engine → publishing automation. I don't manually write pages. I build the machine that writes thousands of them. That's exactly what Hercules needs.</p>
+        </div>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-num">02</div>
+        <div class="deliver-content">
+          <div class="deliver-title">AI-native workflow, not AI-assisted</div>
+          <p class="deliver-body">I use Claude Code and OpenClaw Agents as a systems layer — for keyword clustering, content generation at scale, QA evals, and writing the automation scripts themselves. With unlimited AI budget, I can operate at a speed that would require a 5-person team otherwise.</p>
+        </div>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-num">03</div>
+        <div class="deliver-content">
+          <div class="deliver-title">GEO is already part of my DNA</div>
+          <p class="deliver-body">I don't just optimize for Google. I build content architectures that get cited by ChatGPT, Gemini, and Perplexity — what I call GEO (Generative Engine Optimization). For a product like Hercules, AEO isn't a bonus track. It's a core channel.</p>
+        </div>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-num">04</div>
+        <div class="deliver-content">
+          <div class="deliver-title">Full-stack execution, zero hand-holding</div>
+          <p class="deliver-body">I do the keyword research, write the templates, build the automation pipeline, set up Search Console tracking, and QA the output — end to end. With Hercules' engineering resources, I can go faster, not just bigger.</p>
+        </div>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-num">05</div>
+        <div class="deliver-content">
+          <div class="deliver-title">Night owl. US timezone overlap. Remote-ready.</div>
+          <p class="deliver-body">Based in Indonesia (UTC+7), but I do my best work when the rest of the world is asleep — which puts my active hours naturally in sync with US Pacific and Eastern evenings. Async-first, responsive, and willing to travel to SF for key moments.</p>
+        </div>
+      </div>
+      <div class="deliver-card deliver-card-final">
+        <div class="deliver-num">06</div>
+        <div class="deliver-content">
+          <div class="deliver-title">I already started</div>
+          <p class="deliver-body">I built <strong class="accent">luxesalon.onhercules.app</strong> before this interview. I mapped the 6-layer URL architecture before being asked. I researched Stripe's 46 supported countries independently. This document isn't prep work — it's a preview of how I operate on day one.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="doc-footer">
+    <div class="footer-brand">Hercules.app</div>
+    <div class="footer-meta">
+      <span class="accent">100-Day pSEO Campaign Plan</span><br>
+      Prepared for Brendan Falk, CEO · Zeus AI Labs (Hercules.app) · February 24, 2026<br>
+      <span class="muted">Fauzi Abdillah — Programmatic SEO & GEO Developer</span>
+    </div>
+  </div>
+
+</div>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  document.querySelectorAll('.section').forEach(el => {
+    el.style.transform = 'translateY(20px)';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
