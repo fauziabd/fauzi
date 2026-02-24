@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hercules — pSEO Strategy: High-Intent Targeting</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+        :root {
+            --bg: #080C14;
+            --bg2: #0D1520;
+            --bg3: #111927;
+            --accent: #F0C040;
+            --accent2: #E8855A;
+            --accent3: #5AB4E8;
+            --green: #4ADE80;
+            --text: #E8EDF5;
+            --muted: #6B7A96;
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 32px 80px;
+        }
+
+        /* ── COVER ── */
+        .cover {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -300px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(240, 192, 64, 0.07) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(240, 192, 64, 0.08);
+            border: 1px solid rgba(240, 192, 64, 0.2);
+            border-radius: 100px;
+            padding: 6px 16px;
+            margin-bottom: 28px;
+            width: fit-content;
+        }
+
+        .cover-badge span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .cover-badge::before {
+            content: '●';
+            color: var(--green);
+            font-size: 8px;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .cover-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .cover-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 640px;
+            animation: fadeUp 0.6s 0.25s ease both;
+        }
+
+        .stat-box {
+            background: var(--bg2);
+            padding: 20px 16px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 72px 0;
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section.visible {
+            opacity: 1;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .lead {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 660px;
+            line-height: 1.85;
+            margin-bottom: 36px;
+        }
+
+        /* ── CONTENT TYPOGRAPHY ── */
+        .section h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent3);
+            margin: 36px 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section h3::before {
+            content: '';
+            width: 14px;
+            height: 1px;
+            background: var(--accent3);
+        }
+
+        .section p {
+            color: var(--muted);
+            margin-bottom: 14px;
+            max-width: 720px;
+        }
+
+        .section strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .section em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .section ul,
+        .section ol {
+            padding-left: 20px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .section li {
+            margin-bottom: 6px;
+        }
+
+        /* ── CODE ── */
+        .section pre {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .section pre code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent3);
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 2;
+        }
+
+        .section code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            background: rgba(90, 180, 232, 0.08);
+            border: 1px solid rgba(90, 180, 232, 0.15);
+            border-radius: 4px;
+            padding: 2px 7px;
+            color: var(--accent3);
+        }
+
+        /* ── TABLES ── */
+        .section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 32px;
+            font-size: 12.5px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .section thead tr {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .section td {
+            padding: 11px 16px;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            line-height: 1.6;
+            background: var(--bg2);
+        }
+
+        .section tr:last-child td {
+            border-bottom: none;
+        }
+
+        .section tr:hover td {
+            background: var(--bg3);
+            transition: background 0.15s;
+        }
+
+        .section td strong {
+            color: var(--text);
+        }
+
+        /* ── BLOCKQUOTE ── */
+        .section blockquote {
+            border-left: 2px solid var(--accent);
+            background: rgba(240, 192, 64, 0.04);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .section blockquote p {
+            color: var(--text);
+            font-style: italic;
+            margin: 0;
+            max-width: none;
+        }
+
+        /* ── HR ── */
+        .section hr {
+            display: none;
+        }
+
+        /* ── FOOTER ── */
+        .doc-footer {
+            padding: 40px 32px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .footer-pun {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 480px;
+            text-align: right;
+            line-height: 1.7;
+        }
+
+        .footer-pun em {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 0 20px 60px;
+            }
+
+            .doc-nav {
+                padding: 14px 20px;
+            }
+
+            .cover-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section th,
+            .section td {
+                padding: 8px 10px;
+            }
+
+            .footer-pun {
+                text-align: left;
+            }
+
+            .doc-footer {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- COVER -->
+        <div class="cover">
+            <div class="cover-badge"><span>Hercules.app · Confidential</span></div>
+            <div class="cover-title">pSEO Strategy:<br><em>High-Intent</em> Targeting</div>
+            <div class="cover-stats">
+                <div class="stat-box">
+                    <span class="stat-num">53</span>
+                    <span class="stat-label">Industries</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">~200</span>
+                    <span class="stat-label">Competitors</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">18K+</span>
+                    <span class="stat-label">Pages (EN)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">3</span>
+                    <span class="stat-label">URL Tracks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTIONS RENDERED FROM MD -->
+        <div id="sections"></div>
+
+    </div>
+
+    <footer class="doc-footer">
+        <div class="footer-pun">Zeus gave Hercules the power. Then came the <em>12 labors.</em></div>
+    </footer>
+
+    <script>
+        const md = "# Hercules \u2014 pSEO Strategy: High-Intent Targeting\n**\"Build your own custom software.\"** \u2014 audience already ready to spend.\n\n---\n\n## 1. Matrix: Targeting Strategy\n\nThree URL tracks. Each targets a different stage of the buyer journey.\n\n```\n/build-software/\n\u2514\u2500\u2500 {industry}                   \"Build Custom Software for {Industry}\"\n    \u2514\u2500\u2500 {tool}                   \"Build Custom {Tool} for {Industry}\"\n\n/best-software/\n\u2514\u2500\u2500 {industry}                   \"Best Software for {Industry}\"\n    \u2514\u2500\u2500 {tool}                   \"Best {Tool} Software for {Industry}\"\n\n/alternatives/\n\u2514\u2500\u2500 {competitor}                 \"{Competitor} Alternatives\"\n    \u2514\u2500\u2500 {industry}               \"Best {Competitor} Alternatives for {Industry}\"\n        \u2514\u2500\u2500 {tool}               \"Best {Competitor} Alternative for {Tool} in {Industry}\"\n```\n\n| Track | Intent | Page Type | Searcher State | Conversion |\n|-------|--------|-----------|----------------|------------|\n| `/build-software/` | **Informational** | Use-case landing page \u2014 Hercules features, benefits, testimonials, live demo CTA | Aware of the problem, exploring solutions | High |\n| `/best-software/` | **Commercial** | Listicle \u2014 top tools ranked with pros, cons, pricing, feature comparison table | Evaluating options, not yet committed | Medium |\n| `/alternatives/` | **Transactional** | Head-to-head \u2014 competitor vs other alternatives first, then competitor vs Hercules as the final showdown | Done with the incumbent, wallet open | Highest |\n\n**Core message on every page:**\n> You didn't start a generic business. Stop using generic software.\n> Build your own custom {tool} \u2014 built for {industry}, powered by AI, ready in minutes.\n\n### Page Structure by Track\n\n**`/build-software/{industry}/{tool}`** \u2014 Informational\nHero \u2192 Problem statement \u2192 How Hercules solves it \u2192 Feature breakdown (industry-specific framing) \u2192 Live demo \u2192 Testimonials \u2192 CTA\n\n**`/best-software/{industry}/{tool}`** \u2014 Commercial\nIntro \u2192 Ranked list of top tools (including Hercules) \u2192 Pros/cons per tool \u2192 Pricing table \u2192 Feature comparison matrix \u2192 Verdict \u2192 CTA\n\n**`/alternatives/{competitor}/{industry}/{tool}`** \u2014 Transactional\nWhy people leave {competitor} \u2192 Top alternatives ranked \u2192 Head-to-head between alternatives \u2192 Final showdown: {competitor} vs Hercules \u2192 Hercules wins on customization, speed, price \u2192 CTA\n\n### Competitor Types\n\n**Vertical** (Table 1) \u2014 industry-specific incumbents. Searcher knows the product by name, actively fleeing it.\n`/alternatives/cloudbeds/hotel/property-management`\n`/alternatives/procore/construction/project-management`\n\n**Horizontal** (Table 2) \u2014 cross-industry tools. Applies to all 53 industries.\n`/alternatives/monday/construction/project-management`\n`/alternatives/salesforce/law-firm/crm`\n\n---\n\n## 2. Summary\n\n| Dimension | Count | Source |\n|-----------|-------|--------|\n| Industries | 53 | Table 1 |\n| Avg specialized tools per industry | ~4.5 | Table 1 |\n| Total vertical tool pages (unique) | ~239 | 53 \u00d7 4.5 |\n| Horizontal tool categories | 31 | Table 2 |\n| Vertical competitors (unique) | ~150 | Table 1, some overlap |\n| Horizontal competitors (unique) | ~50 | Table 2, heavy overlap |\n| **Total unique competitors** | **~200** | |\n\n---\n\n## 3. Page Count \u2014 English Only\n\n### Build & Best Tracks\n\n| Layer | Formula | Pages |\n|-------|---------|-------|\n| `/build-software/{industry}` | 53 | **53** |\n| `/build-software/{industry}/{tool}` \u2014 vertical | 53 \u00d7 4.5 | **239** |\n| `/build-software/{industry}/{tool}` \u2014 horizontal | 53 \u00d7 31 | **1,643** |\n| `/best-software/{industry}` | 53 | **53** |\n| `/best-software/{industry}/{tool}` \u2014 vertical | 53 \u00d7 4.5 | **239** |\n| `/best-software/{industry}/{tool}` \u2014 horizontal | 53 \u00d7 31 | **1,643** |\n| **Subtotal** | | **3,870** |\n\n### Alternatives Track\n\nSplit by competitor type \u2014 vertical and horizontal behave very differently.\n\n**Vertical competitors** are industry-specific. Cloudbeds only competes in Hotel. Procore only in Construction. So each vertical competitor maps to 1\u20132 industries max.\n\n| Layer | Formula | Pages |\n|-------|---------|-------|\n| `/alternatives/{vertical-competitor}` | ~150 unique vertical competitors | **150** |\n| `/alternatives/{vertical-competitor}/{industry}` | 53 industries \u00d7 4 competitors each = 212 pairs | **212** |\n| `/alternatives/{vertical-competitor}/{industry}/{tool}` | 212 pairs \u00d7 avg 4.5 tools | **~954** |\n| **Vertical subtotal** | | **~1,316** |\n\n**Horizontal competitors** serve all industries. Monday.com, Salesforce, HubSpot \u2014 they compete everywhere. So each horizontal competitor gets a page for every industry \u00d7 every tool.\n\n| Layer | Formula | Pages |\n|-------|---------|-------|\n| `/alternatives/{horizontal-competitor}` | ~50 unique horizontal competitors | **50** |\n| `/alternatives/{horizontal-competitor}/{industry}` | 50 competitors \u00d7 53 industries | **2,650** |\n| `/alternatives/{horizontal-competitor}/{industry}/{tool}` | 50 \u00d7 53 \u00d7 avg 4 relevant tools per combo | **~10,600** |\n| **Horizontal subtotal** | | **~13,300** |\n\n| | Pages |\n|--|-------|\n| Vertical alternatives | ~1,316 |\n| Horizontal alternatives | ~13,300 |\n| **Alternatives total** | **~14,616** |\n\n### Grand Total\n\n| | Pages |\n|--|-------|\n| Build & Best tracks | 3,870 |\n| Alternatives \u2014 vertical | 1,316 |\n| Alternatives \u2014 horizontal | 13,300 |\n| **Total (English only)** | **~18,486** |\n| \u00d7 languages (est. 10) | | **~185,000** |\n| \u00d7 city layer | | **millions** |\n\n> The horizontal alternatives track dominates \u2014 13K pages because Monday, Salesforce, HubSpot etc. are relevant to every single industry. One competitor \u00d7 53 industries \u00d7 tools = hundreds of pages per competitor. And every visitor landed here by typing a competitor's name \u2014 they're already walking out the door.\n\n---\n\n## 4. Top 12 Industries to Pick\n\nRanked by: number of tools needed \u00d7 willingness to pay \u00d7 current software fragmentation. These industries run on 5\u201310 separate tools today and pay dearly for each.\n\n| # | Industry | Why High Value | Tools Needed |\n|---|----------|----------------|--------------|\n| 1 | **Hospital & Specialist** | Most complex ops, highest software spend in any sector | EHR, billing, ward management, lab, patient portal, scheduling, compliance |\n| 2 | **Construction & Contractor** | Every project needs its own system, fragmented stack | Bid management, scheduling, RFIs, budget, fleet, field reports, payroll |\n| 3 | **Manufacturing** | Multi-department ops, no single tool fits all | Production planning, BOM, work orders, quality control, inventory, payroll |\n| 4 | **Logistics & Courier** | Real-time ops, driver + client + warehouse all need tools | Dispatch, route optimization, POD, live tracking, fleet, invoicing |\n| 5 | **IT Services & MSP** | Tool-native buyers, pay monthly per client seat | Ticketing, RMM, PSA, client management, time tracking, billing |\n| 6 | **Law Firm** | Time = money, every minute tracked, high billing rates | Case management, time tracking, client portal, billing, document management |\n| 7 | **Property Management** | Ongoing ops across multiple properties | Tenant portal, maintenance, rent collection, inspections, accounting, lease management |\n| 8 | **Trucking & Freight** | Federal compliance + logistics = multiple mandatory systems | Load management, ELD/DOT compliance, driver logs, fleet, invoicing |\n| 9 | **Real Estate Agency** | Leads + listings + deals + agents = fragmented | CRM, listings, deal pipeline, agent commission, document signing, marketing |\n| 10 | **Accounting Firm** | Client-heavy, deadline-driven, compliance-bound | Client management, tax workflow, document portal, billing, time tracking |\n| 11 | **Home Care / NDIS** | Government funding = reporting requirements | Care plans, shift scheduling, funding tracker, incident reports, billing, compliance |\n| 12 | **Hotel & Hostel** | Multi-channel revenue, guest experience, daily ops | PMS, channel manager, revenue management, guest portal, housekeeping, F&B |\n\n---\n\n## 5. Tables (For Reference Only)\n\n### Table 1 \u2014 Industry-Specific Tools & Vertical Competitors\n\n| Industry | Industry-Specific Tool Categories | Vertical Competitors |\n|----------|-----------------------------------|----------------------|\n| Hotel & Hostel | Property Management (PMS), Channel Manager, Revenue Management, Guest Portal | Cloudbeds, Mews, Oracle Hospitality, Little Hotelier |\n| Restaurant & Cafe | POS, Table Management, Kitchen Display, Reservation System | Toast, Square Restaurants, Lightspeed, TouchBistro |\n| Dental Clinic | Practice Management, Patient Records, Treatment Planning | Dentrix, Eaglesoft, Curve Dental, Carestream |\n| Medical / GP Clinic | EHR, Patient Portal, Billing & Claims | athenahealth, Kareo, DrChrono, eClinicalWorks |\n| Hospital & Specialist | Clinical Management, Ward Management, Bed Tracking, Lab Orders | Epic, Cerner, Meditech, Allscripts |\n| Veterinary | Practice Management, Pet Records, Vaccination Tracker | Covetrus, ImproMed, AVImark, EzyVet |\n| Pharmacy | Prescription Management, Drug Inventory, Patient Profiles | PioneerRx, Liberty Software, PrimeRx, BestRx |\n| Optometry | Patient Records, Exam Workflow, Eyewear POS | Eyefinity, RevolutionEHR, Crystal PM, Compulink |\n| Mental Health | Session Notes, Treatment Plans, Telehealth, Insurance Billing | SimplePractice, TherapyNotes, TheraNest, IntakeQ |\n| Chiropractor | SOAP Notes, Adjustment Tracking, Billing | ChiroTouch, Jane App, Genesis Chiropractic, Eclipse |\n| Dietitian / Nutrition | Meal Planning, Client Progress, Protocol Management | Nutrium, Practice Better, Healthie, Nutritics |\n| Home Care / NDIS | Care Plans, Shift Scheduling, Funding Tracker | ShiftCare, Brevity, HCP, Carelink |\n| Childcare Centre | Enrolment, Daily Reports, Parent Comms, Billing | Procare, Brightwheel, HiMama, Kangarootime |\n| Gym & Fitness | Membership Management, Class Scheduling, Access Control | Mindbody, Glofox, Wodify, Pike13 |\n| Yoga & Pilates | Class Booking, Instructor Scheduling, Packages | Mindbody, WellnessLiving, Arketa, TeamUp |\n| Hair Salon | Appointment Booking, Staff Roster, Service Menu | Fresha, Vagaro, Booksy, Phorest |\n| Spa & Beauty | Booking, Treatment Room Schedule, Retail POS | Fresha, Meevo, Phorest, Booker |\n| Barbershop | Walk-in Queue, Booking, Barber Commissions | Vagaro, Booksy, Squire, StyleSeat |\n| Personal Trainer | Client Programs, Progress Tracking, Session Booking | Trainerize, My PT Hub, PTminder, TrueCoach |\n| Travel Agency | Itinerary Builder, Quote Management, Booking Engine | Tourwriter, Rezdy, TravelJoy, Travelport |\n| Car Rental | Fleet Availability, Reservation, Damage Report | Rentman, HQ Rental Software, Booqable, RentWorks |\n| Auto Repair / Workshop | Job Card, Parts Inventory, Service History | Mitchell 1, Shop-Ware, Tekmetric, AutoLeap |\n| Taxi & Chauffeur | Dispatch, Driver App, Ride Tracking | Autocab, iCabbi, Mozio, Cabstarr |\n| Logistics & Courier | Dispatch, Route Optimization, POD, Live Tracking | Onfleet, Circuit, Tookan, Routific |\n| Moving Company | Job Estimator, Crew Scheduling, Bill of Lading | MoverBase, Elromco, SmartMoving, Oncue |\n| Trucking & Freight | Load Management, ELD/DOT Compliance, Driver Logs | KeepTruckin, Samsara, AscendTMS, Rose Rocket |\n| Cleaning Service | Job Scheduling, Team Dispatch, Client Portal | Jobber, ZenMaid, Launch27, Swept |\n| Pest Control | Job Routing, Chemical Tracking, Service Reports | ServiceTitan, FieldRoutes, PestPac, Briostack |\n| Plumbing / HVAC | Job Dispatch, Quotes, Parts Ordering | ServiceTitan, Jobber, FieldEdge, Housecall Pro |\n| Electrician / Trade | Job Cards, Scheduling, Compliance Certificates | Tradify, ServiceM8, Commusoft, Fergus |\n| Landscaping | Route Scheduling, Quotes, Job Photos | Jobber, Aspire, LMN, SingleOps |\n| Construction & Contractor | Bid Management, Project Scheduling, RFIs, Budget | Procore, Buildertrend, CoConstruct, PlanGrid |\n| Architecture Firm | Project Management, Time Tracking, Drawing Management | Monograph, ArchiOffice, BQE Core, Deltek |\n| Interior Design | Project Management, Procurement, Client Presentations | Studio Designer, Ivy, Mydoma, Houzz Pro |\n| Real Estate Agency | Lead Management, Listings, Deal Pipeline, Commission | Follow Up Boss, LionDesk, kvCORE, Propertybase |\n| Property Management | Tenant Portal, Maintenance Requests, Rent Collection | Buildium, AppFolio, Propertyware, Rentec |\n| Law Firm | Case Management, Time Tracking, Client Portal, Billing | Clio, MyCase, PracticePanther, Smokeball |\n| Accounting Firm | Client Management, Tax Workflow, Document Portal | Canopy, Karbon, TaxDome, Practice Ignition |\n| IT Services & MSP | Ticketing, Remote Monitoring, PSA | ConnectWise, Autotask, Syncro, Atera |\n| Photography Studio | Client Booking, Gallery Delivery, Contract & Invoice | HoneyBook, Studio Ninja, Sprout Studio, T\u00e1ve |\n| Event Planner | Event Timeline, Vendor Management, Seating, Budget | HoneyBook, Planning Pod, Cvent, Whova |\n| Catering | Menu Builder, Event Orders, Staffing, Dietary Notes | Total Party Planner, Caterease, Better Cater |\n| School / Tutoring | Student Records, Class Scheduling, Parent Comms | Blackbaud, Classter, Teachworks, Educate Online |\n| Church / Non-profit | Donor Management, Volunteer Scheduling, Events | Planning Center, Breeze, Salesforce NPSP, Kindful |\n| Farm & Agriculture | Crop Planning, Equipment Log, Harvest Tracking | FarmLogs, Granular, AgriWebb, Conservis |\n| Manufacturing | Production Planning, BOM, Work Orders, Quality Control | Fishbowl, JobBOSS, E2 Shop, MRPeasy |\n| Wholesale & Distribution | Purchase Orders, Stock Levels, Supplier Management | Unleashed, inFlow, Cin7, TradeGecko |\n| Retail Shop | POS, Stock Management, Loyalty, Staff Rota | Lightspeed, Vend, Shopify POS, Square |\n| Co-working Space | Desk/Room Booking, Member Portal, Billing | Nexudus, Cobot, OfficeRnD, Optix |\n| Security Company | Guard Scheduling, Incident Reports, Patrol Logs | TrackTik, Silvertrac, GuardsPro, OnGuard |\n| Freelance & Creative Agency | Project Pipeline, Client Portal, Contracts, Invoicing | HoneyBook, Dubsado, Bonsai, 17hats |\n| Dental Lab | Lab Order Management, Case Tracking, Invoicing | Labtrac, LabStar, DentaLab |\n| Pharmacy Chain | Multi-location Prescription, Staff, Reporting | PioneerRx, PrimeRx, Liberty |\n\n---\n\n### Table 2 \u2014 All-Industry Tool Categories & Horizontal Competitors\n\n| Tool Category | Horizontal Competitors |\n|---------------|------------------------|\n| CRM | Salesforce, HubSpot, Zoho CRM, Pipedrive |\n| Project Management | Monday.com, Asana, ClickUp, Wrike |\n| Task Management | ClickUp, Todoist, Notion, Asana |\n| HR Management | BambooHR, Rippling, Zoho People, Workday |\n| Payroll | Gusto, Rippling, ADP, Paychex |\n| Time & Attendance | Deputy, When I Work, TSheets, Clockify |\n| Leave Management | BambooHR, Timetastic, LeaveBoard, Factorial |\n| Expense Management | Expensify, Ramp, Concur, Zoho Expense |\n| Accounting & Finance | QuickBooks, Xero, FreshBooks, Wave |\n| Invoicing & Billing | QuickBooks, FreshBooks, Zoho Invoice, Bonsai |\n| Inventory Management | Cin7, inFlow, Fishbowl, Zoho Inventory |\n| Procurement | Procurify, Coupa, Tradogram, Kissflow |\n| Help Desk / Ticketing | Freshdesk, Zendesk, Zoho Desk, Intercom |\n| Document Management | DocuWare, M-Files, SharePoint, Notion |\n| Knowledge Base / Wiki | Confluence, Notion, Guru, Tettra |\n| Form Builder | Typeform, JotForm, Google Forms, Formstack |\n| Survey & Feedback | SurveyMonkey, Typeform, Qualtrics, Delighted |\n| Workflow Automation | Zapier, Make, Monday.com, Kissflow |\n| Reporting & Dashboard | Tableau, Power BI, Looker, Databox |\n| Employee Portal / Intranet | SharePoint, Confluence, Jostle, Simpplr |\n| Client Portal | HubSpot, Copilot, SuiteDash, ManyRequests |\n| Onboarding Tool | BambooHR, Talmundo, Enboarder, Rippling |\n| Performance Review | Lattice, 15Five, Leapsome, BambooHR |\n| Learning Management (LMS) | TalentLMS, Docebo, LearnDash, 360Learning |\n| Asset Management | Asset Panda, EZOfficeInventory, Snipe-IT |\n| Maintenance Management | UpKeep, Limble CMMS, Fiix, Hippo CMMS |\n| Fleet Management | Samsara, Verizon Connect, Fleetio, GPS Insight |\n| Membership Management | Wild Apricot, MemberPress, Glue Up, Raklet |\n| Loyalty & Rewards | Yotpo, Smile.io, Loyverse, Antavo |\n| Event Management | Eventbrite, Cvent, Whova, Bizzabo |\n| Donation & Fundraising | Donorbox, Bloomerang, Kindful, Givebutter |\n\n---\n\nPrepared by Fauzi Abdillah (fauzi.pages.dev) for Brendan Falk, CEO of Zeus AI Labs \u2014 February 24, 2026\n";
+
+        marked.setOptions({ breaks: true, gfm: true });
+
+        // Parse the full markdown
+        const raw = marked.parse(md);
+
+        // Split into sections by h2
+        const tmp = document.createElement('div');
+        tmp.innerHTML = raw;
+
+        const container = document.getElementById('sections');
+        let currentSection = null;
+        let sectionIndex = 0;
+
+        const sectionLabels = [
+            '01 — Matrix: Targeting Strategy',
+            '02 — Summary',
+            '03 — Page Count',
+            '04 — Top 12 Industries',
+            '05 — Tables: For Reference'
+        ];
+
+        Array.from(tmp.childNodes).forEach(node => {
+            if (node.nodeName === 'H1') return; // skip — already in cover
+            if (node.nodeName === 'H2') {
+                currentSection = document.createElement('div');
+                currentSection.className = 'section';
+
+                const label = document.createElement('div');
+                label.className = 'section-label';
+                label.textContent = sectionLabels[sectionIndex] || node.textContent;
+                sectionIndex++;
+
+                const title = document.createElement('h2');
+                title.className = 'section-title';
+                // Strip the "1. " numbering from h2 text
+                title.innerHTML = node.innerHTML.replace(/^\d+\.\s+/, '').replace(/—/, '<em>—</em>');
+
+                currentSection.appendChild(label);
+                currentSection.appendChild(title);
+                container.appendChild(currentSection);
+            } else if (node.nodeName === 'HR') {
+                // skip
+            } else {
+                if (!currentSection) {
+                    currentSection = document.createElement('div');
+                    currentSection.className = 'section';
+                    container.appendChild(currentSection);
+                }
+                if (node.nodeType !== 3 || node.textContent.trim()) {
+                    currentSection.appendChild(node.cloneNode(true));
+                }
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('.section').forEach(s => {
+            s.style.transform = 'translateY(20px)';
+            observer.observe(s);
+        });
+    </script>
+</body>
+
+</html>
