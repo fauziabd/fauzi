@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programmatic SEO Plan — Anything</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:  #FFFFFF;
+  --bg:     #F9F9F9;
+  --text:   #18191B;
+  --muted:  #555658;
+  --faint:  #888A8C;
+  --border: rgba(0,0,0,0.09);
+  --green:  #DBEDDF;
+  --green2: #2E6B42;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { font-size: 19px; color: #fff; letter-spacing: -0.01em; }
+.nav-logo em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.nav-pill {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 100px;
+  padding: 7px 18px;
+  font-size: 11px;
+  color: #fff;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+}
+
+/* HERO */
+.hero {
+  min-height: 88vh;
+  background: linear-gradient(175deg,
+    #145D96 0%, #1E72B0 12%, #2E87C4 25%,
+    #4299D0 38%, #5AAEDA 50%,
+    #7DC4E6 62%, #A5D8F0 74%,
+    #C8EAF8 85%, #E0F3FC 94%, #EEF9FF 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 48px 90px;
+  position: relative;
+  overflow: hidden;
+}
+.cloud {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.c1 { top: 16%; left: 3%;  width: 320px; height: 140px; background: radial-gradient(ellipse, rgba(255,255,255,0.6) 0%, transparent 68%); filter: blur(24px); }
+.c2 { top: 26%; right: 5%; width: 260px; height: 110px; background: radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, transparent 68%); filter: blur(18px); }
+.c3 { top: 48%; left: 18%; width: 200px; height:  80px; background: radial-gradient(ellipse, rgba(255,255,255,0.35) 0%, transparent 68%); filter: blur(14px); }
+.c4 { top: 38%; right: 22%;width: 150px; height:  60px; background: radial-gradient(ellipse, rgba(255,255,255,0.3) 0%, transparent 68%); filter: blur(12px); }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 100px;
+  padding: 6px 16px;
+  margin-bottom: 36px;
+  font-size: 11px;
+  color: #fff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  position: relative; z-index: 1;
+  animation: fadeUp 0.5s ease both;
+}
+.hero-badge::before { content: '●'; font-size: 7px; opacity: 0.75; }
+
+h1.hero-title {
+  font-size: clamp(50px, 9vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.5s 0.1s ease both;
+  text-shadow: 0 2px 20px rgba(10,50,90,0.25);
+}
+h1.hero-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-bottom: 52px;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.5s 0.2s ease both;
+  text-shadow: 0 1px 8px rgba(10,50,90,0.2);
+}
+
+/* STATS — solid white cards for maximum contrast */
+.hero-stats {
+  display: flex;
+  gap: 8px;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.5s 0.3s ease both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 96px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(10,50,90,0.15);
+}
+.stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* CONTENT */
+.content { max-width: 960px; margin: 0 auto; padding: 0 52px 100px; }
+
+.section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section:last-child { border-bottom: none; }
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.section-label::before { content: ''; width: 20px; height: 1px; background: var(--faint); }
+
+h2.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+h2.section-title em { font-style: italic; color: var(--muted); }
+
+p.lead { font-size: 16px; color: var(--muted); max-width: 660px; line-height: 1.85; margin-bottom: 36px; }
+h3.sub { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin: 36px 0 14px; font-weight: 600; }
+
+/* ── CODE BLOCKS ──────────────────────────────
+   pre  = dark background, BRIGHT text, bright selection
+   code = light background, DARK text, dark selection
+   No white-on-white anywhere.
+──────────────────────────────────────────────── */
+pre {
+  background: #0D1117;
+  border: 1px solid #30363D;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+pre code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 12.5px;
+  color: #CDD9E5;
+  line-height: 2;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+/* Selection inside pre: dark blue bg, white text */
+pre *::selection { background: #264F78; color: #FFFFFF; }
+pre *::-moz-selection { background: #264F78; color: #FFFFFF; }
+
+/* Inline code: light gray bg, near-black text */
+code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 11.5px;
+  background: #EBEBEB;
+  border: 1px solid #D3D3D3;
+  border-radius: 5px;
+  padding: 2px 7px;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+/* Selection on inline code: dark bg, white text */
+code::selection { background: #1A1A1A; color: #FFFFFF; }
+code::-moz-selection { background: #1A1A1A; color: #FFFFFF; }
+
+/* TABLES */
+.table-wrap { overflow-x: auto; margin: 16px 0 32px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #fff; }
+thead tr { background: #F2F2F2; border-bottom: 1px solid var(--border); }
+th { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); padding: 11px 16px; text-align: left; font-weight: 600; }
+td { padding: 10px 16px; color: var(--muted); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #FAFAFA; }
+td strong { color: var(--text); font-weight: 500; }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.card-num { font-family: 'Instrument Serif', serif; font-size: 34px; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.card-label { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+.card-clickable { cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; }
+.card-clickable:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.card-hint { font-size: 11px; color: #3A95CC; margin-top: 10px; font-weight: 500; }
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  overflow: hidden;
+  animation: modalIn 0.2s ease both;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+.modal-header {
+  padding: 22px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.modal-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: var(--text); }
+.modal-close {
+  width: 32px; height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--muted);
+  transition: background 0.15s;
+}
+.modal-close:hover { background: #EBEBEB; }
+.modal-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+.modal-tab {
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--faint);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.modal-tab.active { color: var(--text); border-bottom-color: var(--text); }
+.modal-body { overflow-y: auto; padding: 24px 28px; flex: 1; }
+.modal-panel { display: none; }
+.modal-panel.active { display: block; }
+.modal-body table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.modal-body thead tr { background: #F5F5F5; position: sticky; top: 0; }
+.modal-body th { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border); }
+.modal-body td { padding: 9px 14px; color: var(--muted); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.modal-body tr:last-child td { border-bottom: none; }
+.modal-body tr:hover td { background: #FAFAFA; }
+.modal-body td strong { color: var(--text); font-weight: 500; }
+.modal-body .tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 500;
+  padding: 2px 8px; border-radius: 4px;
+  margin: 1px;
+}
+.tag-v { background: #EEF2FF; color: #3730A3; }
+.tag-h { background: #F0FDF4; color: #166534; }
+.tag-ai { background: #FFF7ED; color: #C2410C; }
+
+/* INTENT MATRIX */
+.matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.matrix-cell { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.matrix-track { font-family: 'SF Mono','Consolas',monospace; font-size: 12px; color: var(--text); font-weight: 600; margin-bottom: 8px; }
+.badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
+}
+.b-info { background: #EEF2FF; color: #3730A3; }
+.b-comm { background: #FFF7ED; color: #C2410C; }
+.b-tran { background: var(--green); color: var(--green2); }
+.matrix-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+/* JOURNEY */
+.journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 32px 0; }
+.step { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 12px; text-align: center; }
+.step-num { font-family: 'Instrument Serif', serif; font-size: 22px; color: var(--text); display: block; margin-bottom: 5px; }
+.step-label { font-size: 9px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; display: block; margin-bottom: 7px; }
+.step-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* PHASES */
+.phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.phase { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; }
+.phase-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.phase-title { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--text); }
+.phase-days { font-size: 10px; background: var(--green); color: var(--green2); padding: 3px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.phase ul { padding-left: 16px; }
+.phase li { font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+.project-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.project-name { font-weight: 600; color: var(--text); font-size: 14px; margin-bottom: 4px; }
+.project-stat { font-family: 'Instrument Serif', serif; font-size: 26px; color: var(--text); margin: 8px 0 4px; }
+.project-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #F2F2F2;
+}
+.footer-meta { font-size: 12px; color: var(--faint); }
+.footer-sig { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 15px; color: var(--muted); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .hero { padding: 100px 24px 60px; }
+  .content { padding: 0 24px 60px; }
+  .card-grid, .matrix, .phases, .about-grid, .journey { grid-template-columns: 1fr; }
+  footer { padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><em>Any</em>thing</div>
+  <div class="nav-pill">pSEO Strategy · Prepared by Fauzi Abdillah</div>
+</nav>
+
+<div class="hero">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
+  <div class="hero-badge">Organic Growth Strategy</div>
+  <h1 class="hero-title"><em>Programmatic</em> SEO<br>for <em>Any</em>thing.</h1>
+  <p class="hero-sub">Your users are already the brief. Hair salons, medical students, real estate agents, film producers — every one of them is a page that doesn't exist yet.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="stat-num">53+</span><span class="stat-label">Industries</span></div>
+    <div class="hero-stat"><span class="stat-num">200+</span><span class="stat-label">Competitors</span></div>
+    <div class="hero-stat"><span class="stat-num">18K+</span><span class="stat-label">Pages (EN)</span></div>
+    <div class="hero-stat"><span class="stat-num">3</span><span class="stat-label">URL Tracks</span></div>
+    <div class="hero-stat"><span class="stat-num">Millions</span><span class="stat-label">With Languages</span></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">01 — The User Journey</div>
+    <h2 class="section-title">From search query<br>to <em>paying user.</em></h2>
+    <p class="lead">Every Anything user starts with a problem in their industry — not a search for an "AI app builder." The pSEO system intercepts them at the moment they're searching for a solution.</p>
+    <div class="journey">
+      <div class="step"><span class="step-num">01</span><span class="step-label">Problem</span><div class="step-desc">"I need booking software for my salon"</div></div>
+      <div class="step"><span class="step-num">02</span><span class="step-label">Search</span><div class="step-desc">Googles "booking app for hair salon"</div></div>
+      <div class="step"><span class="step-num">03</span><span class="step-label">Landing</span><div class="step-desc">Lands on /build/hair-salon/booking</div></div>
+      <div class="step"><span class="step-num">04</span><span class="step-label">Reframe</span><div class="step-desc">Discovers they can build their own in minutes</div></div>
+      <div class="step"><span class="step-num">05</span><span class="step-label">Signup</span><div class="step-desc">Creates account — high intent, pre-qualified</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — Targeting Matrix</div>
+    <h2 class="section-title">Three tracks.<br><em>Three buyer mindsets.</em></h2>
+    <p class="lead">Each URL track targets a different stage of the buyer journey. Same infrastructure, different intent, different conversion path.</p>
+    <pre><code>/build/{industry}/{tool}         → "Build Custom {Tool} for {Industry}"
+/best/{industry}/{tool}          → "Best {Tool} App for {Industry}"
+/alternatives/{competitor}/...   → "{Competitor} Alternatives for {Industry}"</code></pre>
+    <div class="matrix">
+      <div class="matrix-cell">
+        <div class="matrix-track">/build/</div>
+        <span class="badge b-info">Informational</span>
+        <div class="matrix-desc">Use-case landing page. Features, benefits, live demo. Searcher is aware of the problem, exploring solutions.</div>
+      </div>
+      <div class="matrix-cell">
+        <div class="matrix-track">/best/</div>
+        <span class="badge b-comm">Commercial</span>
+        <div class="matrix-desc">Ranked listicle with pros, cons, pricing. Searcher is evaluating options, not yet committed.</div>
+      </div>
+      <div class="matrix-cell">
+        <div class="matrix-track">/alternatives/</div>
+        <span class="badge b-tran">Transactional</span>
+        <div class="matrix-desc">Head-to-head. Competitor vs alternatives, Anything as the final showdown. Wallet already open.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — The Opportunity</div>
+    <h2 class="section-title">The math<br><em>is real.</em></h2>
+    <p class="lead">Every combination of industry × tool × competitor is a page. At scale, this becomes a search moat that compounds over time.</p>
+    <div class="card-grid">
+      <div class="card card-clickable" onclick="openModal('industries')">
+        <div class="card-num">53</div>
+        <div class="card-label">Target Industries</div>
+        <div class="card-hint">View all →</div>
+      </div>
+      <div class="card card-clickable" onclick="openModal('tools')">
+        <div class="card-num">~40</div>
+        <div class="card-label">Tool Categories per Industry</div>
+        <div class="card-hint">View all →</div>
+      </div>
+      <div class="card card-clickable" onclick="openModal('competitors')">
+        <div class="card-num">~200</div>
+        <div class="card-label">Unique Competitors</div>
+        <div class="card-hint">View all →</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Track</th><th>Formula</th><th>Pages (EN)</th></tr></thead>
+        <tbody>
+          <tr><td><code>/build/</code> all layers</td><td>53 industries × tools</td><td><strong>3,870</strong></td></tr>
+          <tr><td><code>/best/</code> all layers</td><td>53 industries × tools</td><td><strong>3,870</strong></td></tr>
+          <tr><td><code>/alternatives/</code> vertical</td><td>~150 competitors × industries</td><td><strong>~1,316</strong></td></tr>
+          <tr><td><code>/alternatives/</code> horizontal</td><td>~50 competitors × 53 × tools</td><td><strong>~13,300</strong></td></tr>
+          <tr><td><strong>Total — English only</strong></td><td></td><td><strong>~18,486</strong></td></tr>
+          <tr><td>× 10 languages</td><td></td><td><strong>~185,000</strong></td></tr>
+          <tr><td>× city layer</td><td></td><td><strong>Millions</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Target Industries</div>
+    <h2 class="section-title">Your users<br><em>are the brief.</em></h2>
+    <p class="lead">Anything's own testimonials define the priority industries. These aren't hypothetical — they're people already building on the platform today.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Industry</th><th>Why High Value</th><th>Already on Anything</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Hair Salon</strong></td><td>Booking, staff, retail POS — all separate</td><td>✓ Hair stylist AI app testimonial</td></tr>
+          <tr><td>2</td><td><strong>Healthcare / Medical</strong></td><td>EHR, scheduling, billing — massive fragmentation</td><td>✓ Medical student CPR training app</td></tr>
+          <tr><td>3</td><td><strong>Real Estate Agency</strong></td><td>CRM, listings, commissions — all disconnected</td><td>✓ Real estate agent CRM testimonial</td></tr>
+          <tr><td>4</td><td><strong>Film & Production</strong></td><td>Scheduling, budgets, crew management</td><td>✓ Hollywood producer AI app testimonial</td></tr>
+          <tr><td>5</td><td><strong>Construction & Contractor</strong></td><td>Bids, scheduling, RFIs, budget tracking</td><td>High tool fragmentation</td></tr>
+          <tr><td>6</td><td><strong>Law Firm</strong></td><td>Case management, time tracking, billing</td><td>High willingness to pay</td></tr>
+          <tr><td>7</td><td><strong>Property Management</strong></td><td>Tenant portal, maintenance, rent collection</td><td>Recurring multi-tool spend</td></tr>
+          <tr><td>8</td><td><strong>IT Services & MSP</strong></td><td>Ticketing, RMM, PSA — tool-native buyers</td><td>Monthly SaaS spend already high</td></tr>
+          <tr><td>9</td><td><strong>Gym & Fitness</strong></td><td>Membership, scheduling, access control</td><td>Mindbody refugees</td></tr>
+          <tr><td>10</td><td><strong>Restaurant & Cafe</strong></td><td>POS, reservations, kitchen display</td><td>Toast alternatives searches</td></tr>
+          <tr><td>11</td><td><strong>Logistics & Courier</strong></td><td>Dispatch, routing, POD, live tracking</td><td>High ops complexity</td></tr>
+          <tr><td>12</td><td><strong>Accounting Firm</strong></td><td>Client management, tax workflow, billing</td><td>Compliance-driven spend</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">05 — URL Architecture</div>
+    <h2 class="section-title">Four layers.<br><em>Infinite scale.</em></h2>
+    <p class="lead">Each layer is a pillar page linking down to children. Internal linking flows naturally from broad to specific, maximising crawl equity at every level.</p>
+    <pre><code>anything.com/build/
+└── {industry}/              Pillar: "Build Custom Apps for {Industry}"
+    └── {tool}/              Leaf:   "Build Custom {Tool} for {Industry}"
+
+anything.com/best/
+└── {industry}/              Pillar: "Best Apps for {Industry}"
+    └── {tool}/              Leaf:   "Best {Tool} App for {Industry}"
+
+anything.com/alternatives/
+└── {competitor}/            Pillar: "{Competitor} Alternatives"
+    └── {industry}/          Pillar: "... for {Industry}"
+        └── {tool}/          Leaf:   "... for {Tool} in {Industry}"</code></pre>
+    <h3 class="sub">Sample URLs</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>URL</th><th>Target Query</th><th>Intent</th></tr></thead>
+        <tbody>
+          <tr><td><code>/build/hair-salon/booking</code></td><td>"build booking app for hair salon"</td><td>Informational</td></tr>
+          <tr><td><code>/best/gym/membership-management</code></td><td>"best membership management app for gym"</td><td>Commercial</td></tr>
+          <tr><td><code>/alternatives/mindbody/gym/membership</code></td><td>"mindbody alternatives for gym"</td><td>Transactional</td></tr>
+          <tr><td><code>/alternatives/monday/construction/project-management</code></td><td>"monday.com alternatives for construction"</td><td>Transactional</td></tr>
+          <tr><td><code>/alternatives/salesforce/law-firm/crm</code></td><td>"salesforce alternatives for law firms"</td><td>Transactional</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">06 — The Roadmap</div>
+    <h2 class="section-title">100 days.<br><em>Three phases.</em></h2>
+    <p class="lead">Foundation first. Scale second. Languages and cities third. Each phase builds on the last.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-header"><div class="phase-title">Foundation</div><div class="phase-days">Day 1–30</div></div>
+        <ul>
+          <li>Finalize URL matrix and content rules</li>
+          <li>Keyword research — 12 priority industries</li>
+          <li>Build data pipeline and page templates</li>
+          <li>Launch 100 English pages</li>
+          <li>GSC setup, tracking, QA framework</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-header"><div class="phase-title">Scale</div><div class="phase-days">Day 31–70</div></div>
+        <ul>
+          <li>Expand to all 53 industries</li>
+          <li>Launch /alternatives/ track</li>
+          <li>5,000+ pages live</li>
+          <li>4 languages added</li>
+          <li>First organic signups tracked</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-header"><div class="phase-title">Compound</div><div class="phase-days">Day 71–100</div></div>
+        <ul>
+          <li>10+ languages active</li>
+          <li>30,000+ pages indexed</li>
+          <li>City-level pages for top markets</li>
+          <li>AEO/GEO optimization layer</li>
+          <li>Conversion rate optimization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">07 — Beyond SEO</div>
+    <h2 class="section-title">pSEO isn't just SEO<br><em>anymore.</em></h2>
+    <p class="lead">Every page is simultaneously a sales asset, a media asset, and a distribution asset. One page built once activates six channels automatically.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Channel</th><th>How the pSEO page activates it</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Organic SEO</strong></td><td>"best booking app for hair salons" → ranks, earns traffic forever</td></tr>
+          <tr><td><strong>Paid Ads</strong></td><td>Google Ads sends "gym membership software" clicks to /build/gym/membership — not the homepage</td></tr>
+          <tr><td><strong>Affiliate & Referral</strong></td><td>Partner links /alternatives/mindbody/yoga with their UTM — page already speaks to their audience</td></tr>
+          <tr><td><strong>Cold Outreach</strong></td><td>Sales email to salon owner links /build/hair-salon/booking — feels personal, converts better</td></tr>
+          <tr><td><strong>Retargeting</strong></td><td>Visited /alternatives/mindbody but didn't convert → "Still looking for a Mindbody alternative?"</td></tr>
+          <tr><td><strong>AEO / AI Citations</strong></td><td>ChatGPT asked "Mindbody alternatives for yoga" → Anything page gets cited as the answer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">08 — Traffic Projections</div>
+    <h2 class="section-title">Scale by<br><em>day 100.</em></h2>
+    <p class="lead">Conservative estimates based on real keyword data. The /alternatives/ track drives the most — every visitor landed there by typing a competitor's name.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Milestone</th><th>Pages Live</th><th>Est. Monthly Visits</th><th>Key Driver</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Day 30</strong></td><td>100</td><td>~300</td><td>Foundation English pages</td></tr>
+          <tr><td><strong>Day 60</strong></td><td>5,000</td><td>~4–6K</td><td>4 languages, /build/ track live</td></tr>
+          <tr><td><strong>Day 100</strong></td><td>30,000+</td><td>~40–60K</td><td>10+ languages, /alternatives/ live</td></tr>
+          <tr><td><strong>Post-100</strong></td><td>185,000+</td><td>500K–1M+</td><td>Full language × city rollout</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">09 — Who's Building This</div>
+    <h2 class="section-title">Shipped systems,<br><em>not decks.</em></h2>
+    <p class="lead">Fauzi Abdillah — programmatic SEO and GEO developer based in Indonesia. I build end-to-end pSEO systems: data pipelines, templates, automation, and publishing infrastructure.</p>
+    <div class="about-grid">
+      <div class="project-card">
+        <div class="project-name">PetsOnline.com.au</div>
+        <div class="project-stat">25,247 pages</div>
+        <div class="project-desc">3D matrix: breed × location × pet type. ~59% organic traffic. Live in production.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-name">Geonode.com</div>
+        <div class="project-stat">230+ pages</div>
+        <div class="project-desc">Country × use-case pSEO on Next.js SSG. Free tools as traffic magnets with upsell funnels.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-name">Faa3tilbud.dk</div>
+        <div class="project-stat">~5,000 pages</div>
+        <div class="project-desc">27 trade categories × 200+ Danish cities. Google Business data enrichment. Lead gen.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-name">TextWiseAI.com</div>
+        <div class="project-stat">AI dating coach</div>
+        <div class="project-desc">All copy mine. Dual-channel pSEO. AppStore + web. Next.js + Byword.ai pipeline.</div>
+      </div>
+    </div>
+    <p style="margin-top:32px; color:var(--muted); font-size:14px; line-height:1.8;">
+      Remote · Indonesia (UTC+7) · Contract — no SF overhead, easy to test.<br>
+      <a href="https://fauzi.pages.dev" style="color:var(--text); font-weight:500;">fauzi.pages.dev</a>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-meta">Prepared by Fauzi Abdillah (fauzi.pages.dev) for Anything — March 2026</div>
+  <div class="footer-sig">Your users are already the strategy.</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Reference Data</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs" id="modal-tabs"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+// ── MODAL DATA ───────────────────────────────────────────────
+
+const MODALS = {
+
+  industries: {
+    title: '53 Target Industries',
+    tabs: ['All Industries'],
+    panels: [`
+      <table>
+        <thead><tr><th>#</th><th>Industry</th><th>Category</th><th>Avg Tools Needed</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Hospital & Specialist</strong></td><td>Healthcare</td><td>7+</td></tr>
+          <tr><td>2</td><td><strong>Medical / GP Clinic</strong></td><td>Healthcare</td><td>5</td></tr>
+          <tr><td>3</td><td><strong>Dental Clinic</strong></td><td>Healthcare</td><td>4</td></tr>
+          <tr><td>4</td><td><strong>Mental Health Practice</strong></td><td>Healthcare</td><td>4</td></tr>
+          <tr><td>5</td><td><strong>Veterinary</strong></td><td>Healthcare</td><td>4</td></tr>
+          <tr><td>6</td><td><strong>Pharmacy</strong></td><td>Healthcare</td><td>4</td></tr>
+          <tr><td>7</td><td><strong>Optometry</strong></td><td>Healthcare</td><td>3</td></tr>
+          <tr><td>8</td><td><strong>Chiropractor</strong></td><td>Healthcare</td><td>3</td></tr>
+          <tr><td>9</td><td><strong>Dietitian / Nutrition</strong></td><td>Healthcare</td><td>3</td></tr>
+          <tr><td>10</td><td><strong>Home Care / NDIS</strong></td><td>Healthcare</td><td>6</td></tr>
+          <tr><td>11</td><td><strong>Hair Salon</strong></td><td>Beauty & Wellness</td><td>4</td></tr>
+          <tr><td>12</td><td><strong>Spa & Beauty</strong></td><td>Beauty & Wellness</td><td>4</td></tr>
+          <tr><td>13</td><td><strong>Barbershop</strong></td><td>Beauty & Wellness</td><td>3</td></tr>
+          <tr><td>14</td><td><strong>Nail Salon</strong></td><td>Beauty & Wellness</td><td>3</td></tr>
+          <tr><td>15</td><td><strong>Tattoo Studio</strong></td><td>Beauty & Wellness</td><td>3</td></tr>
+          <tr><td>16</td><td><strong>Gym & Fitness</strong></td><td>Beauty & Wellness</td><td>4</td></tr>
+          <tr><td>17</td><td><strong>Yoga & Pilates</strong></td><td>Beauty & Wellness</td><td>3</td></tr>
+          <tr><td>18</td><td><strong>Personal Trainer</strong></td><td>Beauty & Wellness</td><td>3</td></tr>
+          <tr><td>19</td><td><strong>Construction & Contractor</strong></td><td>Trades & Field</td><td>6+</td></tr>
+          <tr><td>20</td><td><strong>Electrician / Trade</strong></td><td>Trades & Field</td><td>4</td></tr>
+          <tr><td>21</td><td><strong>Plumbing / HVAC</strong></td><td>Trades & Field</td><td>4</td></tr>
+          <tr><td>22</td><td><strong>Pest Control</strong></td><td>Trades & Field</td><td>4</td></tr>
+          <tr><td>23</td><td><strong>Cleaning Service</strong></td><td>Trades & Field</td><td>4</td></tr>
+          <tr><td>24</td><td><strong>Landscaping</strong></td><td>Trades & Field</td><td>4</td></tr>
+          <tr><td>25</td><td><strong>Security Company</strong></td><td>Trades & Field</td><td>5</td></tr>
+          <tr><td>26</td><td><strong>Law Firm</strong></td><td>Professional Services</td><td>5</td></tr>
+          <tr><td>27</td><td><strong>Accounting Firm</strong></td><td>Professional Services</td><td>5</td></tr>
+          <tr><td>28</td><td><strong>Architecture Firm</strong></td><td>Professional Services</td><td>5</td></tr>
+          <tr><td>29</td><td><strong>Interior Design</strong></td><td>Professional Services</td><td>4</td></tr>
+          <tr><td>30</td><td><strong>IT Services & MSP</strong></td><td>Professional Services</td><td>5</td></tr>
+          <tr><td>31</td><td><strong>Photography Studio</strong></td><td>Professional Services</td><td>4</td></tr>
+          <tr><td>32</td><td><strong>Freelance & Creative Agency</strong></td><td>Professional Services</td><td>4</td></tr>
+          <tr><td>33</td><td><strong>Real Estate Agency</strong></td><td>Real Estate</td><td>5</td></tr>
+          <tr><td>34</td><td><strong>Property Management</strong></td><td>Real Estate</td><td>6</td></tr>
+          <tr><td>35</td><td><strong>Logistics & Courier</strong></td><td>Transport & Logistics</td><td>5</td></tr>
+          <tr><td>36</td><td><strong>Trucking & Freight</strong></td><td>Transport & Logistics</td><td>5</td></tr>
+          <tr><td>37</td><td><strong>Moving Company</strong></td><td>Transport & Logistics</td><td>4</td></tr>
+          <tr><td>38</td><td><strong>Car Rental</strong></td><td>Transport & Logistics</td><td>4</td></tr>
+          <tr><td>39</td><td><strong>Taxi & Chauffeur</strong></td><td>Transport & Logistics</td><td>4</td></tr>
+          <tr><td>40</td><td><strong>Restaurant & Cafe</strong></td><td>Food & Hospitality</td><td>5</td></tr>
+          <tr><td>41</td><td><strong>Hotel & Hostel</strong></td><td>Food & Hospitality</td><td>6</td></tr>
+          <tr><td>42</td><td><strong>Catering</strong></td><td>Food & Hospitality</td><td>4</td></tr>
+          <tr><td>43</td><td><strong>Travel Agency</strong></td><td>Food & Hospitality</td><td>4</td></tr>
+          <tr><td>44</td><td><strong>Manufacturing</strong></td><td>Industry & Trade</td><td>6+</td></tr>
+          <tr><td>45</td><td><strong>Wholesale & Distribution</strong></td><td>Industry & Trade</td><td>5</td></tr>
+          <tr><td>46</td><td><strong>Retail Shop</strong></td><td>Industry & Trade</td><td>4</td></tr>
+          <tr><td>47</td><td><strong>Auto Repair / Workshop</strong></td><td>Industry & Trade</td><td>4</td></tr>
+          <tr><td>48</td><td><strong>Farm & Agriculture</strong></td><td>Industry & Trade</td><td>4</td></tr>
+          <tr><td>49</td><td><strong>School / Tutoring</strong></td><td>Education & Nonprofit</td><td>5</td></tr>
+          <tr><td>50</td><td><strong>Church / Non-profit</strong></td><td>Education & Nonprofit</td><td>4</td></tr>
+          <tr><td>51</td><td><strong>Childcare Centre</strong></td><td>Education & Nonprofit</td><td>4</td></tr>
+          <tr><td>52</td><td><strong>Event Planner</strong></td><td>Events & Media</td><td>5</td></tr>
+          <tr><td>53</td><td><strong>Co-working Space</strong></td><td>Other</td><td>4</td></tr>
+        </tbody>
+      </table>
+    `]
+  },
+
+  tools: {
+    title: 'Tool Categories',
+    tabs: ['Industry-Specific', 'General (All Industries)'],
+    panels: [`
+      <table>
+        <thead><tr><th>Industry</th><th>Specialized Tool Categories</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hotel & Hostel</strong></td><td>Property Management (PMS), Channel Manager, Revenue Management, Guest Portal</td></tr>
+          <tr><td><strong>Restaurant & Cafe</strong></td><td>POS, Table Management, Kitchen Display, Reservation System</td></tr>
+          <tr><td><strong>Dental Clinic</strong></td><td>Practice Management, Patient Records, Treatment Planning</td></tr>
+          <tr><td><strong>Medical / GP Clinic</strong></td><td>EHR, Patient Portal, Billing & Claims</td></tr>
+          <tr><td><strong>Hospital & Specialist</strong></td><td>Clinical Management, Ward Management, Bed Tracking, Lab Orders</td></tr>
+          <tr><td><strong>Veterinary</strong></td><td>Practice Management, Pet Records, Vaccination Tracker</td></tr>
+          <tr><td><strong>Pharmacy</strong></td><td>Prescription Management, Drug Inventory, Patient Profiles</td></tr>
+          <tr><td><strong>Mental Health</strong></td><td>Session Notes, Treatment Plans, Telehealth, Insurance Billing</td></tr>
+          <tr><td><strong>Gym & Fitness</strong></td><td>Membership Management, Class Scheduling, Access Control</td></tr>
+          <tr><td><strong>Yoga & Pilates</strong></td><td>Class Booking, Instructor Scheduling, Packages</td></tr>
+          <tr><td><strong>Hair Salon</strong></td><td>Appointment Booking, Staff Roster, Service Menu</td></tr>
+          <tr><td><strong>Spa & Beauty</strong></td><td>Booking, Treatment Room Schedule, Retail POS</td></tr>
+          <tr><td><strong>Personal Trainer</strong></td><td>Client Programs, Progress Tracking, Session Booking</td></tr>
+          <tr><td><strong>Construction</strong></td><td>Bid Management, Project Scheduling, RFIs, Budget</td></tr>
+          <tr><td><strong>Electrician / Trade</strong></td><td>Job Cards, Scheduling, Compliance Certificates</td></tr>
+          <tr><td><strong>Law Firm</strong></td><td>Case Management, Time Tracking, Client Portal, Billing</td></tr>
+          <tr><td><strong>Accounting Firm</strong></td><td>Client Management, Tax Workflow, Document Portal</td></tr>
+          <tr><td><strong>IT Services & MSP</strong></td><td>Ticketing, Remote Monitoring, PSA</td></tr>
+          <tr><td><strong>Real Estate Agency</strong></td><td>Lead Management, Listings, Deal Pipeline, Commission</td></tr>
+          <tr><td><strong>Property Management</strong></td><td>Tenant Portal, Maintenance Requests, Rent Collection</td></tr>
+          <tr><td><strong>Logistics & Courier</strong></td><td>Dispatch, Route Optimization, POD, Live Tracking</td></tr>
+          <tr><td><strong>Trucking & Freight</strong></td><td>Load Management, ELD/DOT Compliance, Driver Logs</td></tr>
+          <tr><td><strong>Moving Company</strong></td><td>Job Estimator, Crew Scheduling, Bill of Lading</td></tr>
+          <tr><td><strong>Manufacturing</strong></td><td>Production Planning, BOM, Work Orders, Quality Control</td></tr>
+          <tr><td><strong>Retail Shop</strong></td><td>POS, Stock Management, Loyalty, Staff Rota</td></tr>
+          <tr><td><strong>Event Planner</strong></td><td>Event Timeline, Vendor Management, Seating, Budget</td></tr>
+          <tr><td><strong>Travel Agency</strong></td><td>Itinerary Builder, Quote Management, Booking Engine</td></tr>
+          <tr><td><strong>School / Tutoring</strong></td><td>Student Records, Class Scheduling, Parent Comms</td></tr>
+          <tr><td><strong>Church / Non-profit</strong></td><td>Donor Management, Volunteer Scheduling, Events</td></tr>
+          <tr><td><strong>Farm & Agriculture</strong></td><td>Crop Planning, Equipment Log, Harvest Tracking</td></tr>
+        </tbody>
+      </table>
+    `, `
+      <table>
+        <thead><tr><th>Tool Category</th><th>Applies To</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CRM</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Project Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Task Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>HR Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Payroll</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Time & Attendance</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Leave Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Expense Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Accounting & Finance</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Invoicing & Billing</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Inventory Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Procurement</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Help Desk / Ticketing</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Document Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Knowledge Base / Wiki</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Form Builder</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Survey & Feedback</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Workflow Automation</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Reporting & Dashboard</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Employee Portal / Intranet</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Client Portal</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Onboarding Tool</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Performance Review</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Learning Management (LMS)</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Asset Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Maintenance Management</strong></td><td>All industries</td></tr>
+          <tr><td><strong>Fleet Management</strong></td><td>Transport-heavy industries</td></tr>
+          <tr><td><strong>Membership Management</strong></td><td>Gyms, clubs, nonprofits</td></tr>
+          <tr><td><strong>Loyalty & Rewards</strong></td><td>Retail, hospitality</td></tr>
+          <tr><td><strong>Event Management</strong></td><td>Events, hospitality</td></tr>
+          <tr><td><strong>Donation & Fundraising</strong></td><td>Nonprofits, churches</td></tr>
+        </tbody>
+      </table>
+    `]
+  },
+
+  competitors: {
+    title: '~200 Competitors',
+    tabs: ['Vertical SaaS', 'Horizontal SaaS', 'AI Builders'],
+    panels: [`
+      <table>
+        <thead><tr><th>Industry</th><th>Vertical Competitors</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hotel & Hostel</strong></td><td>Cloudbeds, Mews, Oracle Hospitality, Little Hotelier</td></tr>
+          <tr><td><strong>Restaurant & Cafe</strong></td><td>Toast, Square Restaurants, Lightspeed, TouchBistro</td></tr>
+          <tr><td><strong>Dental Clinic</strong></td><td>Dentrix, Eaglesoft, Curve Dental, Carestream</td></tr>
+          <tr><td><strong>Medical / GP Clinic</strong></td><td>athenahealth, Kareo, DrChrono, eClinicalWorks</td></tr>
+          <tr><td><strong>Hospital & Specialist</strong></td><td>Epic, Cerner, Meditech, Allscripts</td></tr>
+          <tr><td><strong>Veterinary</strong></td><td>Covetrus, ImproMed, AVImark, EzyVet</td></tr>
+          <tr><td><strong>Pharmacy</strong></td><td>PioneerRx, Liberty Software, PrimeRx, BestRx</td></tr>
+          <tr><td><strong>Mental Health</strong></td><td>SimplePractice, TherapyNotes, TheraNest, IntakeQ</td></tr>
+          <tr><td><strong>Gym & Fitness</strong></td><td>Mindbody, Glofox, Wodify, Pike13</td></tr>
+          <tr><td><strong>Yoga & Pilates</strong></td><td>Mindbody, WellnessLiving, Arketa, TeamUp</td></tr>
+          <tr><td><strong>Hair Salon</strong></td><td>Fresha, Vagaro, Booksy, Phorest</td></tr>
+          <tr><td><strong>Spa & Beauty</strong></td><td>Fresha, Meevo, Phorest, Booker</td></tr>
+          <tr><td><strong>Personal Trainer</strong></td><td>Trainerize, My PT Hub, PTminder, TrueCoach</td></tr>
+          <tr><td><strong>Construction</strong></td><td>Procore, Buildertrend, CoConstruct, PlanGrid</td></tr>
+          <tr><td><strong>Electrician / Trade</strong></td><td>Tradify, ServiceM8, Commusoft, Fergus</td></tr>
+          <tr><td><strong>Plumbing / HVAC</strong></td><td>ServiceTitan, Jobber, FieldEdge, Housecall Pro</td></tr>
+          <tr><td><strong>Pest Control</strong></td><td>ServiceTitan, FieldRoutes, PestPac, Briostack</td></tr>
+          <tr><td><strong>Cleaning Service</strong></td><td>Jobber, ZenMaid, Launch27, Swept</td></tr>
+          <tr><td><strong>Law Firm</strong></td><td>Clio, MyCase, PracticePanther, Smokeball</td></tr>
+          <tr><td><strong>Accounting Firm</strong></td><td>Canopy, Karbon, TaxDome, Practice Ignition</td></tr>
+          <tr><td><strong>IT Services & MSP</strong></td><td>ConnectWise, Autotask, Syncro, Atera</td></tr>
+          <tr><td><strong>Real Estate Agency</strong></td><td>Follow Up Boss, LionDesk, kvCORE, Propertybase</td></tr>
+          <tr><td><strong>Property Management</strong></td><td>Buildium, AppFolio, Propertyware, Rentec</td></tr>
+          <tr><td><strong>Logistics & Courier</strong></td><td>Onfleet, Circuit, Tookan, Routific</td></tr>
+          <tr><td><strong>Trucking & Freight</strong></td><td>KeepTruckin, Samsara, AscendTMS, Rose Rocket</td></tr>
+          <tr><td><strong>Moving Company</strong></td><td>MoverBase, Elromco, SmartMoving, Oncue</td></tr>
+          <tr><td><strong>Manufacturing</strong></td><td>Fishbowl, JobBOSS, E2 Shop, MRPeasy</td></tr>
+          <tr><td><strong>Retail Shop</strong></td><td>Lightspeed, Vend, Shopify POS, Square</td></tr>
+          <tr><td><strong>Travel Agency</strong></td><td>Tourwriter, Rezdy, TravelJoy, Travelport</td></tr>
+          <tr><td><strong>Event Planner</strong></td><td>HoneyBook, Planning Pod, Cvent, Whova</td></tr>
+        </tbody>
+      </table>
+    `, `
+      <table>
+        <thead><tr><th>Tool Category</th><th>Horizontal Competitors</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CRM</strong></td><td>Salesforce, HubSpot, Zoho CRM, Pipedrive</td></tr>
+          <tr><td><strong>Project Management</strong></td><td>Monday.com, Asana, ClickUp, Wrike</td></tr>
+          <tr><td><strong>Task Management</strong></td><td>ClickUp, Todoist, Notion, Asana</td></tr>
+          <tr><td><strong>HR Management</strong></td><td>BambooHR, Rippling, Zoho People, Workday</td></tr>
+          <tr><td><strong>Payroll</strong></td><td>Gusto, Rippling, ADP, Paychex</td></tr>
+          <tr><td><strong>Time & Attendance</strong></td><td>Deputy, When I Work, TSheets, Clockify</td></tr>
+          <tr><td><strong>Expense Management</strong></td><td>Expensify, Ramp, Concur, Zoho Expense</td></tr>
+          <tr><td><strong>Accounting & Finance</strong></td><td>QuickBooks, Xero, FreshBooks, Wave</td></tr>
+          <tr><td><strong>Invoicing & Billing</strong></td><td>QuickBooks, FreshBooks, Zoho Invoice, Bonsai</td></tr>
+          <tr><td><strong>Inventory Management</strong></td><td>Cin7, inFlow, Fishbowl, Zoho Inventory</td></tr>
+          <tr><td><strong>Help Desk / Ticketing</strong></td><td>Freshdesk, Zendesk, Zoho Desk, Intercom</td></tr>
+          <tr><td><strong>Document Management</strong></td><td>DocuWare, M-Files, SharePoint, Notion</td></tr>
+          <tr><td><strong>Knowledge Base / Wiki</strong></td><td>Confluence, Notion, Guru, Tettra</td></tr>
+          <tr><td><strong>Form Builder</strong></td><td>Typeform, JotForm, Google Forms, Formstack</td></tr>
+          <tr><td><strong>Workflow Automation</strong></td><td>Zapier, Make, Monday.com, Kissflow</td></tr>
+          <tr><td><strong>Reporting & Dashboard</strong></td><td>Tableau, Power BI, Looker, Databox</td></tr>
+          <tr><td><strong>Client Portal</strong></td><td>HubSpot, Copilot, SuiteDash, ManyRequests</td></tr>
+          <tr><td><strong>Performance Review</strong></td><td>Lattice, 15Five, Leapsome, BambooHR</td></tr>
+          <tr><td><strong>Learning Management (LMS)</strong></td><td>TalentLMS, Docebo, LearnDash, 360Learning</td></tr>
+          <tr><td><strong>Asset Management</strong></td><td>Asset Panda, EZOfficeInventory, Snipe-IT</td></tr>
+          <tr><td><strong>Fleet Management</strong></td><td>Samsara, Verizon Connect, Fleetio, GPS Insight</td></tr>
+          <tr><td><strong>Membership Management</strong></td><td>Wild Apricot, MemberPress, Glue Up, Raklet</td></tr>
+          <tr><td><strong>Loyalty & Rewards</strong></td><td>Yotpo, Smile.io, Loyverse, Antavo</td></tr>
+          <tr><td><strong>Event Management</strong></td><td>Eventbrite, Cvent, Whova, Bizzabo</td></tr>
+          <tr><td><strong>Donation & Fundraising</strong></td><td>Donorbox, Bloomerang, Kindful, Givebutter</td></tr>
+        </tbody>
+      </table>
+    `, `
+      <table>
+        <thead><tr><th>AI Builder</th><th>Position</th><th>Why Anything Wins</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bolt.new</strong></td><td>Most popular AI builder, StackBlitz-backed</td><td>Code-first, no mobile, no payments built-in</td></tr>
+          <tr><td><strong>Lovable</strong></td><td>YC-backed, fastest growing, $150M+ ARR</td><td>Web only, no native mobile, limited backend</td></tr>
+          <tr><td><strong>V0</strong> (Vercel)</td><td>Frontend-focused, Vercel distribution</td><td>UI components only, no full-stack</td></tr>
+          <tr><td><strong>Replit</strong></td><td>Oldest, huge user base, $400M Series D</td><td>Dev-focused, steep learning curve for non-tech</td></tr>
+          <tr><td><strong>Cursor</strong></td><td>AI code editor, not a builder</td><td>Requires coding knowledge</td></tr>
+          <tr><td><strong>Rocket.new</strong></td><td>$15M seed, Salesforce Ventures + Accel</td><td>India-focused, enterprise angle, less consumer</td></tr>
+          <tr><td><strong>Bubble</strong></td><td>5M+ apps, no-code veteran</td><td>No AI-native, steep learning curve, slow</td></tr>
+          <tr><td><strong>Glide</strong></td><td>Data-driven apps from spreadsheets</td><td>Limited to spreadsheet data, no AI</td></tr>
+          <tr><td><strong>Retool</strong></td><td>Internal tools for developers</td><td>Requires dev skills, not for end users</td></tr>
+          <tr><td><strong>Webflow</strong></td><td>Best-in-class visual web builder</td><td>No backend, no apps, marketing sites only</td></tr>
+          <tr><td><strong>Softr</strong></td><td>No-code portals from Airtable</td><td>Airtable-dependent, limited scope</td></tr>
+          <tr><td><strong>Draftbit</strong></td><td>Mobile app builder, visual</td><td>Not AI-native, dev-oriented</td></tr>
+          <tr><td><strong>NxCode</strong></td><td>AI builder, heavy content/SEO</td><td>Less consumer traction vs Anything</td></tr>
+          <tr><td><strong>Capacity.so</strong></td><td>2-person bootstrapped AI builder</td><td>No mobile, early stage, limited features</td></tr>
+        </tbody>
+      </table>
+    `]
+  }
+};
+
+// ── MODAL LOGIC ──────────────────────────────────────────────
+
+function openModal(key) {
+  const data = MODALS[key];
+  document.getElementById('modal-title').textContent = data.title;
+
+  const tabsEl = document.getElementById('modal-tabs');
+  const bodyEl = document.getElementById('modal-body');
+
+  tabsEl.innerHTML = data.tabs.map((t, i) =>
+    `<div class="modal-tab ${i===0?'active':''}" onclick="switchTab(this,${i})">${t}</div>`
+  ).join('');
+
+  bodyEl.innerHTML = data.panels.map((p, i) =>
+    `<div class="modal-panel ${i===0?'active':''}" data-panel="${i}">${p}</div>`
+  ).join('');
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchTab(el, idx) {
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelector(`.modal-panel[data-panel="${idx}"]`).classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
